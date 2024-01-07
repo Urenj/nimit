@@ -31,143 +31,29 @@
             margin: 0 !important;
         }
 
-        .side-container {
-            display: flex;
-            height: 100vh;
-            top: 0;
-            bottom: 0;
-        }
-
-        .sidebar {
-            width: 230px;
-            overflow-y: auto;
-            position: fixed;
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
-            box-sizing: border-box;
-            height: 100%;
-        }
-
-        .container {
-            flex: 1;
-            padding: 20px;
-            box-sizing: border-box;
-            margin-left: 250px; /* Adjusted to match the width of the sidebar */
-        }
-
-        .content{
-            margin-top: 0;
-            padding-left: 30px;
-            font-size: 13px;
-            margin-bottom: 20px; /* Added margin at the bottom to separate from the footer */
-        }
-
-        /* Add some styles for better visualization */
-        a {
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .sidebar a:hover {
-            color: #ffc40c;
-        }
-
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .sidebar li {
-            margin-bottom: 10px;
-        }
-
-        .content {
-            margin-top: 0px !important;
-          margin-left: 210px; /* Same as the width of the sidenav */
-          font-size: 13px; /* Increased text to enable scrolling */
-          padding: 0px 30px;
-        }
-
-        .page-footer {
-            width: 100%;
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-            box-sizing: border-box;
-            clear: both; /* Clear floating elements */
-            position: relative; /* Make sure it stays at the bottom */
-            z-index: 1;
+        .main-wrapper{
+            grid-template-rows: 5% 75% 20%;
+            grid-template-columns: 20% 75%;
+            grid-template-areas: 
+            'header' 'header'
+            'sidenav' 'content'
+            'footer' 'footer'
+            ;
         }
 
     </style>
 </head>
 <body>
 
-    <div class="side-container">
-        <div class="sidebar">
-            <div class="section">
-                    <h2>Sidebar</h2>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
+    <div class="main-wrapper">
+        <nav class="nav-wrapper amber">
+            <div class="head">
+                <a href="#" class="brand-logo black-text left">AniNeru</a>
             </div>
-            
-        </div>
+        </nav>
+    
 
-    </div>
+
+
 
 
