@@ -5,23 +5,25 @@
 }
 
 .wrapper-commission{
-    height: 100vh;
+    height: 100%;
     width: 1300px ;
     display: flex;
-    justify-content: center;
-    align-items: center;
     padding: 15px;
-
 }
 
 .commission{    
     background-color: #2D2F31;
     color: white;   
-    height: 595px;
+    height: 612px;
     width: 100%;
+    position: relative;
+    top: 53px;
     border-radius: 15px;
     padding: 15px;
-    overflow-y: auto;
+    overflow-y: scroll;
+    display: flex;
+    justify-self: center;
+    align-self: center;
 }
 
 .commission::-webkit-scrollbar-track
@@ -47,9 +49,39 @@
 
 
 th{
-    font-weight: 500;
+    font-weight: 600;
     color: #D5C596;
 }
 
+th:nth-child(2),
+td:nth-child(2),
+th:nth-child(7),
+td:nth-child(7)
+{
+    width: 20%;
+}
 
+th:nth-child(7),
+td:nth-child(7){
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    width: auto;
+}
+
+
+@media (min-height: 860px) {
+    .commission{
+    position: relative;
+    top: 85px;
+    height: 620px;
+    }
+  }
+
+  @media (min-height: 950px) {
+    .commission{
+    position: relative;
+    top: 70x;
+    }
+  }
 
