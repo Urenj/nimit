@@ -74,7 +74,7 @@
 		}
 
 		.akawnt.center.amber-text{
-			align: justify !important;
+			text-align: justify !important;
 			font-size: 14px !important;
 		}
 
@@ -95,7 +95,6 @@
 		.i-login{
 			margin: 13px 0px 0px 15px;
 			position: relative;
-			padding: ;
 			float: left;
 /*			background-image: url(https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/face/default/24px.svg);*/
 /*			background-color: white;*/
@@ -235,10 +234,6 @@
 
 		.ekis{
 			padding-left: 0px !important;
-		}
-
-		.row-2{
-
 		}
 
 		a {
@@ -465,96 +460,97 @@
 </head>
 <body>
 
-		<div class='box'>
-		  <div class='box-form'>
-		      <div class='box-login-tab'></div>
-		      <div class='box-login-title'>
-		      	<div class="row">
-		      		<div class="col s12 m12 l12">
-		      			<a href="#" class="pirson"><i class="hey material-icons black-text left">account_circle</i>
-            			</a>
-            			<span class="login-text black-text left">LOG-IN</span>
-
-		    		</div>
-		      	</div>
-		      </div>
-		        
-		    <div class='box-login'>
-		      	<form action="createacc.php" >
-		      		<div class='fieldset-body' id='login_form'>
-		        		<a href="#" onclick="openLoginInfo();" class='b b-form i i-more'><i class="material-icons amber-text">more_horiz</i	></a>
-		        		<p class='field'>
-		        		  <label for='user'>E-MAIL</label>
-		        		  <input type='text' id='user' name='user' title='Put your Email here'  required />
-		        		</p>  
-		      			  <p class='field'>
-		        		  <label for='pass'>PASSWORD</label>
-		        		  <input type='password' id='pass' name='pass' title='Input your Password' required />
-		        		</p>
 		
-		        		 <p>
-		        		 	<label style="width: 140px;">
-		        		  	<input type="checkbox" value="TRUE" title='Show Password' onclick="pashPash()">
-		        		  	<span>Show Password</span>
-		        		  	</label>
-		      			</p>
-		        		   
-		        			<input type='submit' id='do_login' value='LOGIN' title='LOG IN' />
-		      		</div>
-		      	</form>
-		    </div>
-		</div>
-		  <div class='box-info'>
-		  	<div class="row">
-		  		<div class="ekis col s12 m12 l12">
-					<a href="#" onclick="closeLoginInfo();" class='b b-info i i-left'><i class="material-icons amber-text">close</i></a>
-		  		</div>
-		  	</div>
-		  	<div class="row-2">
-		  		<div class="col s12 m12 l12">
-		    		<p class="acc center"><span class="akawnt center amber-text" style="align: justify !important;, padding-left: 5px !important;" >No account? <br>Click the button below to create!</span></p>
-		  		</div>
-		  	</div>
-		    <div class='line-wh'></div>
-		    	<a href="createacc.php" class="b-cta btn amber black-text">CREATE ACCOUNT</a>
-		  </div>
-		</div>
-  
+<div class='box'>
+  <div class='box-form'>
+    <div class='box-login-tab'></div>
+    <div class='box-login-title'>
+      <div class="row">
+        <div class="col s12 m12 l12">
+          <a href="#" class="pirson"><i class="hey material-icons black-text left">account_circle</i></a>
+          <span class="login-text black-text left">LOG-IN</span>
+        </div>
+      </div>
+    </div>
 
-	 <!-- Compiled and minified JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <!--JavaScript at end of body for optimized loading-->
-    <script type="text/javascript" src="js/materialize.min.js"></script>
-    <script>
+    <div class='box-login'>
+      <form action="logincode.php" method="POST">
+        <div class='fieldset-body' id='login_form'>
+          <!-- Display error messages here -->
+          <?php
+          if (isset($_GET['error'])) {
+              $error = $_GET['error'];
+              echo "<p class='error-message red-text text-darken-2'>$error</p>";
+          }
+          ?>
 
-		function openLoginInfo() {
-		    jQuery('.b-form').css("opacity","0.01");
-		    jQuery('.box-form').css("left","-37%");
-		    jQuery('.box-info').css("right","-37%");
-		}
-		
-		function closeLoginInfo() {
-		    jQuery('.b-form').css("opacity","1");
-		    jQuery('.box-form').css("left","0px");
-		    jQuery('.box-info').css("right","-5px"); 
-		}
-		
-		jQuery(window).on('resize', function(){
-		    closeLoginInfo();
-		});
+          <a href="#" onclick="openLoginInfo();" class='b b-form i i-more'><i class="material-icons amber-text">more_horiz</i></a>
+          <p class='field'>
+            <label for='email'>E-MAIL</label>
+            <input type='text' id='email' name='email' title='Put your Email here' required />
+          </p>
+          <p class='field'>
+            <label for='pass'>PASSWORD</label>
+            <input type='password' id='pass' name='pass' title='Input your Password' required />
+          </p>
 
+          <p>
+            <label style="width: 140px;">
+              <input type="checkbox" value="TRUE" title='Show Password' onclick="pashPash()">
+              <span>Show Password</span>
+            </label>
+          </p>
 
-    	function pashPash() {
-    	    var temp = document.getElementById("pass");
-    	     
-    	    if (temp.type === "password") {
-    	        temp.type = "text";
-    	    }
-    	    else {
-    	        temp.type = "password";
-    	    }
-    	}
-	</script>
+          <input type='submit' id='do_login' value='LOGIN' title='LOG IN' />
+        </div>
+      </form>
+    </div>
+  </div>
 
+  <div class='box-info'>
+    <div class="row">
+      <div class="ekis col s12 m12 l12">
+        <a href="#" onclick="closeLoginInfo();" class='b b-info i i-left'><i class="material-icons amber-text">close</i></a>
+      </div>
+    </div>
+    <div class="row-2">
+      <div class="col s12 m12 l12">
+        <p class="acc center"><span class="akawnt center amber-text">No account? <br>Click the button below to create!</span></p>
+      </div>
+    </div>
+    <div class='line-wh'></div>
+    <a href="createacc.php" class="b-cta btn amber black-text">CREATE ACCOUNT</a>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+  function openLoginInfo() {
+    jQuery('.b-form').css("opacity", "0.01");
+    jQuery('.box-form').css("left", "-37%");
+    jQuery('.box-info').css("right", "-37%");
+  }
+
+  function closeLoginInfo() {
+    jQuery('.b-form').css("opacity", "1");
+    jQuery('.box-form').css("left", "0px");
+    jQuery('.box-info').css("right", "-5px");
+  }
+
+  jQuery(window).on('resize', function () {
+    closeLoginInfo();
+  });
+
+  function pashPash() {
+    var temp = document.getElementById("pass");
+
+    if (temp.type === "password") {
+      temp.type = "text";
+    } else {
+      temp.type = "password";
+    }
+  }
+</script>
 </body>
 </html>
