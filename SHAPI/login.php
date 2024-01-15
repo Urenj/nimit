@@ -1,3 +1,51 @@
+<?php
+session_start();
+
+include('Admin\assets\config\db.php');
+
+if (isset($_POST['email']) && isset($_POST['pass'])) {
+
+  $email = $_POST['email'];
+  $password = $_POST['pass'];
+
+  if (empty($email) || empty($password)) {
+    echo "Please enter your email and password";
+  } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    echo "Please enter a valid email address";
+  } else {
+
+    $sql = "SELECT * FROM users WHERE email = ?";
+
+    if ($stmt = mysqli_prepare($con, $sql)) {
+      mysqli_stmt_bind_param($stmt, "s", $email);
+      mysqli_stmt_execute($stmt);
+
+      $result = mysqli_stmt_get_result($stmt);
+
+      if (mysqli_num_rows($result) > 0) {
+
+        $row = mysqli_fetch_assoc($result);
+
+        if ($password == $row['password']) {
+
+          $_SESSION['email'] = $row['email'];
+
+          header('Location: Admin/index.php');
+        } else {
+          echo "Invalid password";
+        }
+      } else {
+        echo "User not found";
+      }
+
+      mysqli_stmt_close($stmt);
+    }
+  }
+}
+
+mysqli_close($con);
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -95,7 +143,6 @@
 		.i-login{
 			margin: 13px 0px 0px 15px;
 			position: relative;
-			padding: ;
 			float: left;
 /*			background-image: url(https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/face/default/24px.svg);*/
 /*			background-color: white;*/
@@ -237,9 +284,6 @@
 			padding-left: 0px !important;
 		}
 
-		.row-2{
-
-		}
 
 		a {
 			text-decoration: none;
@@ -480,28 +524,29 @@
 		      </div>
 		        
 		    <div class='box-login'>
-		      	<form action="createacc.php" >
-		      		<div class='fieldset-body' id='login_form'>
-		        		<a href="#" onclick="openLoginInfo();" class='b b-form i i-more'><i class="material-icons amber-text">more_horiz</i	></a>
-		        		<p class='field'>
-		        		  <label for='user'>E-MAIL</label>
-		        		  <input type='text' id='user' name='user' title='Put your Email here'  required />
-		        		</p>  
-		      			  <p class='field'>
-		        		  <label for='pass'>PASSWORD</label>
-		        		  <input type='password' id='pass' name='pass' title='Input your Password' required />
-		        		</p>
-		
-		        		 <p>
-		        		 	<label style="width: 140px;">
-		        		  	<input type="checkbox" value="TRUE" title='Show Password' onclick="pashPash()">
-		        		  	<span>Show Password</span>
-		        		  	</label>
-		      			</p>
-		        		   
-		        			<input type='submit' id='do_login' value='LOGIN' title='LOG IN' />
-		      		</div>
-		      	</form>
+					<form method="POST">
+				<div class='fieldset-body' id='login_form'>
+
+					<a href="#" onclick="openLoginInfo();" class='b b-form i i-more'><i class="material-icons amber-text">more_horiz</i></a>
+					<p class='field'>
+						<label for='email'>E-MAIL</label>
+						<input type='text' id='email' name='email' title='Put your Email here' required />
+					</p>
+					<p class='field'>
+						<label for='pass'>PASSWORD</label>
+						<input type='password' id='pass' name='pass' title='Input your Password' required />
+					</p>
+
+					<p>
+						<label style="width: 140px;">
+						<input type="checkbox" value="TRUE" title='Show Password' onclick="pashPash()">
+						<span>Show Password</span>
+						</label>
+					</p>
+
+					<input type='submit' id='do_login' value='LOGIN' title='LOG IN' />
+					</div>
+				</form>
 		    </div>
 		</div>
 		  <div class='box-info'>
@@ -512,7 +557,7 @@
 		  	</div>
 		  	<div class="row-2">
 		  		<div class="col s12 m12 l12">
-		    		<p class="acc center"><span class="akawnt center amber-text" style="align: justify !important;, padding-left: 5px !important;" >No account? <br>Click the button below to create!</span></p>
+		    		<p class="acc center"><span class="akawnt center amber-text" style="align: justify !important; padding-left: 5px !important;" >No account? <br>Click the button below to create!</span></p>
 		  		</div>
 		  	</div>
 		    <div class='line-wh'></div>
