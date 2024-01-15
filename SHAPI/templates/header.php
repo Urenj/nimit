@@ -28,7 +28,7 @@
 
         .sidenav{
             overflow: hidden !important;
-            
+
         }
 
 
@@ -167,6 +167,17 @@
         a:active{
             background-color: #ffc40c !important;
             border-radius: 30px 30px !important;
+        }
+
+        .card-reveal{
+            opacity: 0.8;
+            overflow: hidden !important;
+            background-color: #212121 !important;
+            color: #ffc40c !important;
+        }
+
+        .art-description{
+            margin-top: 0 !important;
         }
 
 
