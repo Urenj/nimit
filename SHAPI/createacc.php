@@ -435,6 +435,12 @@
 			-o-transition: all 0.3s;
 			transition: all 0.3s;
 
+			-webkit-transition: all 0.3s;
+			-moz-transition: all 0.3s;
+			-ms-transition: all 0.3s;
+			-o-transition: all 0.3s;
+			transition: all 0.3s;
+
 		}
 
 /*CREDITS*/

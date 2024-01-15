@@ -1,5 +1,5 @@
      <!-- Footer -->
-     <footer class="page-footer grey darken-4 amber-text">
+ <!--     <footer class="page-footer grey darken-4 amber-text">
         <div class="container">
           <div class="row">
             <div class="col l6 s12">
@@ -24,10 +24,10 @@
         <div class="footer-copyright grey darken-4 amber-text">
           <div class="container">
             <div class=" center row col s12 m12 l12">© 2023 Copyright AniNeru</div>
-          <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
           </div>
         </div>
-      </footer>
+      </footer> -->
+
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <!-- Compiled and minified JavaScript -->
