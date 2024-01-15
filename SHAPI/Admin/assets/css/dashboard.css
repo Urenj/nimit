@@ -39,6 +39,7 @@
 
 .status-box{
     position: relative;
+    top: 20px;
     bottom: 3px;
     background-color: #2D2F31;
     border: none;
@@ -54,6 +55,7 @@
 
 .current-client-box{
     position: relative;
+    top: 20px;
     bottom: 3px;
     background-color: #2D2F31;
     border: none;
@@ -169,22 +171,39 @@ input[type="checkbox"]:checked + .slider:before {
    transition: background-color 0.5s ease, transform 0.3s ease;
 }
 
-th{
-    width: 25%;
-    font-weight: 300;
+
+legend{
+    font-weight: 700;
+    font-size: 16px;
 }
 
-td{
-    width: 25%;
-    max-height: 30px;
-    max-width: 250px;
+td {
     overflow-wrap: break-word;
+    font-size: 12px;
 }
 
-/* ::-webkit-scrollbar {
-    opacity: 0;
-  } */
+th{
+    font-size: 14px;
+    font-weight: 600;
+}
 
-  
+th:nth-child(6),
+td:nth-child(6),
+th:nth-child(7),
+td:nth-child(7) {
+    width: 20%;
+}
 
 
+@media (min-height: 860px)
+{
+    .status-box{
+        position: relative;
+        top: 45px;
+    }
+    
+    .current-client-box{
+        position: relative;
+        top: 45px;
+    }
+}

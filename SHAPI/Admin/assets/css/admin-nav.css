@@ -39,7 +39,8 @@ html{
     display: grid;  
     grid-template-columns: 80px 45px 75px;
     grid-template-rows: 25px 50px 25px;
-
+    position: relative;
+    top: 20px;
 }
 
 .image-container{
@@ -134,6 +135,31 @@ html{
     animation: pulse s infinite;
   }
 
+  @media (min-height: 860px) {
+    .side-nav{
+    position: relative;
+    bottom: 90px;
+    }
+    .user-container-box{
+    position: relative;
+    top: 45px;
+    }
+  }
+
+  @media (min-height: 950px) {
+    .side-nav{
+    position: relative;
+    bottom: 120px;
+    }
+    .user-container-box{
+    position: relative;
+    top: 70x;
+    }
+  }
+
+
+
+
  
 
 
@@ -143,5 +169,3 @@ html{
 
 
   
-
-
