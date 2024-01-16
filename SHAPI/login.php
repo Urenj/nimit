@@ -7,11 +7,13 @@ if (isset($_POST['email']) && isset($_POST['pass'])) {
 
   $email = $_POST['email'];
   $password = $_POST['pass'];
+  $errors = array('email' => '', 'password' => '');
 
   if (empty($email) || empty($password)) {
     echo "Please enter your email and password";
   } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    echo "Please enter a valid email address";
+    $errors['email'] = 'Please enter a valid email address';	
+	$errors['password'] = 'Invalid email or password';	
   } else {
 
     $sql = "SELECT * FROM users WHERE email = ?";
@@ -25,18 +27,21 @@ if (isset($_POST['email']) && isset($_POST['pass'])) {
       if (mysqli_num_rows($result) > 0) {
 
         $row = mysqli_fetch_assoc($result);
-
+		if($email != $row['email'])
+		{
+			$errors['password'] = 'Invalid email or password';	
+			mysqli_stmt_close($stmt);
+		}
+		
         if ($password == $row['password']) {
 
           $_SESSION['email'] = $row['email'];
-
+		
           header('Location: Admin/index.php');
-        } else {
-          echo "Invalid password";
+        } else {	
+			$errors['password'] = 'Invalid email or password';	
         }
-      } else {
-        echo "User not found";
-      }
+      } 
 
       mysqli_stmt_close($stmt);
     }
@@ -531,10 +536,12 @@ mysqli_close($con);
 					<p class='field'>
 						<label for='email'>E-MAIL</label>
 						<input type='text' id='email' name='email' title='Put your Email here' required />
+						<div class="red-text"><?php if (isset($errors['email'])) echo $errors['email']; ?></div>
 					</p>
 					<p class='field'>
 						<label for='pass'>PASSWORD</label>
 						<input type='password' id='pass' name='pass' title='Input your Password' required />
+						<div class="red-text"><?php if (isset($errors['password'])) echo $errors['password']; ?></div>
 					</p>
 
 					<p>
