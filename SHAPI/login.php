@@ -36,6 +36,7 @@ if (isset($_POST['email']) && isset($_POST['pass'])) {
         if ($password == $row['password']) {
 
           $_SESSION['email'] = $row['email'];
+		  $_SESSION['username'] = $row['username'];
 		
           header('Location: Admin/index.php');
         } else {	

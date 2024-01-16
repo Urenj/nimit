@@ -1,3 +1,84 @@
+<?php
+$error_message = $success_message = '';
+$email = $username = $password = '';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Validate email
+    $email = $_POST['user'];
+    $username = $_POST['username'];
+	$errors = array('userE' => '', 'password' => '', 'userV' => '');
+	
+
+    include('Admin\assets\config\db.php');
+
+    // Check if email or username already exists
+    $check_query = "SELECT * FROM users WHERE email = '$email'";
+    $check_result = $con->query($check_query);
+
+    if ($check_result->num_rows > 0) {
+        $errors['userE'] = 'Email already exists';					
+    } 
+	elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+		$errors['userV'] = 'Please enter a valid email address';
+		
+	}
+	else {
+        // Email is valid, proceed to password validation and database insertion
+        $password = str_replace('*', '', $_POST['pass']);
+
+        // Validate password (add your own password validation logic here)
+        if (strlen($password) >= 11) {
+            $errors['password'] = 'Password must be only at 10 characters long';
+        } else {
+            // Password is valid, proceed to database insertion
+
+            // Insert user data into the 'users' table
+            $insert_query = "INSERT INTO users (email, username, password, status) VALUES ('$email', '$username', '$password', 'Hiatus')";
+
+            if ($con->query($insert_query) === TRUE) {
+                // Display success message using Materialize CSS
+                $success_message = 'Account added successfully!';
+            } else {
+                $error_message = 'Error: ' . $insert_query . '<br>' . $con->error;
+            }
+        }
+    }
+
+    // Close the connection
+    $con->close();
+	
+
+		$modal = <<<EOT
+		<div id="modal1" class="modal center-align">
+			<div class="modal-content">
+				<h4>Registration Complete!</h4>
+			</div>
+			<div class="modal-footer">
+				<a href="login.php" class="modal-close waves-effect waves-green btn yellow darken-3">OK</a>
+			</div>
+		</div>
+		EOT;
+
+
+			// Echo the modal box
+		echo $modal;
+
+		// Echo the JavaScript code to initialize the modal
+		echo '<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			var elems = document.querySelectorAll(".modal");
+			var instances = M.Modal.init(elems);
+			// Open the modal automatically
+			instances[0].open();
+		});
+		</script>';
+
+
+		}
+
+
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +95,13 @@
 
 
 	<style type="text/css">
+
+		.modal{
+			width: 320px;
+			height: 190px;
+			align-items: center;
+		}
+
 /*GENERAL*/
 
 		*, *::before, *::after{
@@ -29,7 +117,7 @@
 
 		body{
 			background-image: url(https://xmple.com/wallpaper/grid-graph-paper-yellow-black-1920x1080-c2-ffd700-000000-l2-2-86-a-45-f-20.svg);
-		
+		}		
 /*TEXT PART*/
 
 		.back{
@@ -93,7 +181,6 @@
 		.i-login{
 			margin: 13px 0px 0px 15px;
 			position: relative;
-			padding: ;
 			float: left;
 /*			background-image: url(https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/face/default/24px.svg);*/
 /*			background-color: white;*/
@@ -233,10 +320,6 @@
 
 		.ekis{
 			padding-left: 0px !important;
-		}
-
-		.row-2{
-
 		}
 
 		a {
@@ -407,7 +490,7 @@
 			height: 24px;
 			float: right;
 			position: relative;
-			margin-top: -26px;
+			margin-top: -50px;
 			right: 2px;
 			z-index: 2;
 			display: none;
@@ -484,38 +567,45 @@
 		      </div>
 		        
 		    <div class='box-login'>
-		      	<form action="createacc.php" id="loginForm" name="login_form">
-		      		<div class='fieldset-body' id='login_form'>
-		        		<a href="login.php" class="back amber-text right">« Back to Login</a>
+		
+				<form method="POST" id="registerForm" name="register_form">
+					<div class='fieldset-body' id='login_form'>
+						<a href="login.php" class="back amber-text right">« Back to Login</a>
 
-		      			<div class="row">
-		      				<div class="col s12 m12 l12">
-		      					<h2 class="amber-text center">REGISTER</h2>
-		      				</div>
-		      			</div>
-		        		<p class='field'>
-		        		  <label for='user'>USERNAME</label>
-		        		  <input type='text' id='username' name='username' title='What name do you wanna called?'  required /> 
-		        		</p>  
-		        		<p class='field'>
-		        		  <label for='user'>E-MAIL</label>
-		        		  <input type='text' id='user' name='user' title='Put your Email here'  required />
-		        		</p>  
-		      			<p class='field'>
-		      			 	<label for='pass'>PASSWORD</label>
-		      			 	<input type='password' id='pass' name='pass' title='Input your Password' required />
-		      			 </p>
-		        		<p>
-		        		 	<label style="width: 140px;">
-		        		  	<input type="checkbox" value="TRUE" title='Show Password' onclick="pashPash()">
-		        		  	<span>Show Password</span>
-		        		  	</label>
-		      			</p>
-		        		   
-		        			<input type='submit' id='do_login' value='SUBMIT' title='LOG IN' />
-		      		</div>
-		      	</form>
+						<div class="row">
+							<div class="col s12 m12 l12">
+								<h2 class="amber-text center">REGISTER</h2>
+							</div>	
+						</div>
+						
+						
+
+						<p class='field'>
+							<label for='username'>USERNAME</label>
+							<input type='text' id='username' name='username' title='What name do you wanna called?' required />
+						</p>
+						<p class='field' style="margin: 0;">
+							<label for='user'>E-MAIL</label>
+							<input type='text' id='user' name='user' title='Put your Email here' required />
+							<div class="red-text"><?php if (isset($errors['userE'])) echo $errors['userE']; if (isset($errors['userV'])) echo $errors['userV'];?></div>
+						</p>
+						<p class='field' style="margin: 0;">
+							<label for='pass'>PASSWORD</label>
+							<input type='password' id='pass' name='pass' title='Input your Password' required />
+							<div class="red-text"><?php if (isset($errors['password'])) echo $errors['password']; ?></div>
+						</p>
+						<p>
+							<label style="width: 140px;">
+								<input type="checkbox" value="TRUE" title='Show Password' onclick="pashPash()">
+								<span>Show Password</span>
+							</label>
+						</p>
+						<input type='submit' id='do_register' value='SUBMIT' title='REGISTER' />
+					</div>
+				</form>
 		    </div>
+			<div id="error-message"></div>
+ 			<div id="success-message"></div>
 		</div>
 <!-- 		  <div class='box-info'>
 		  	<div class="row">
@@ -539,6 +629,7 @@
     <!--JavaScript at end of body for optimized loading-->
     <script type="text/javascript" src="js/materialize.min.js"></script>
     <script>
+	    M.AutoInit();
 
     	function pashPash() {
     	    var temp = document.getElementById("pass");
