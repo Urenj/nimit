@@ -1,3 +1,19 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['email'])) {
+
+    // Redirect to the login page or handle unauthorized access
+    header('Location: login.php');
+    exit();
+}
+
+// Retrieve the username from the session
+$username = $_SESSION['username'];
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +27,7 @@
 
     <div class="wrapper">
     <div class="nav-container">
+  
                <div class="user-container">
                     <span class="user-container-box">
                         <span class="image-container">
@@ -20,7 +37,9 @@
                             <p style="font-size: 18x;">Hello, </p>                           
                         </span>
                              <p id="role">Admin</p>
-                             <p id="username" style="font-size: 18px; font-weight: 500;">Test</p>
+                             <p id="username" style="font-size: 18px; font-weight: 500;">   
+                             <?php echo $username; ?>!
+                            </p>
                      </span>
                 </div>
                     <div class="sidenav-wrapper">
