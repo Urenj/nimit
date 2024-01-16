@@ -19,17 +19,22 @@
 
         .brand-logo{
              font-family: Borel;
-             font-size: 33px;
+/*             font-size: 33px;*/
         }
-
-/*        .sidenav{
-            background-color: #ffc40c !important;
-        }*/
 
         .sidenav{
             overflow: hidden !important;
-
+            background-color: #212121 !important;
         }
+
+        .sidenav > ul, li, a, i{
+            color: #ffc40c !important;
+        }
+
+        /*.sidenav.sidenav-fixed{
+            background-image: linear-gradient(30deg ,#212121, #ffc107 !important);
+
+        }*/
 
 
         nav.top-nav{
@@ -37,7 +42,8 @@
             -webkit-box-shadow: none;
             box-shadow: none;
             border-bottom: 0.5px solid rgba(0,0,0,0.14);
-            background-color: white;
+            background-color: #ffd54f;
+/*            opacity: 0.9;*/
             padding: 15px 30px;
         }
 
@@ -70,7 +76,7 @@
         }
 
         .logo-section{
-            padding-bottom: 15px;
+/*            padding-bottom: 15px;*/
             padding-top: 50px;
 
             flex-shrink: 0;
@@ -100,11 +106,34 @@
             margin-right: 1.5rem;
         }
 
+        .stat{
+            margin-left: 6.5rem;
+            margin-right: 6.5rem;
+            padding-top: 20px;
 
+            border: 1px #212121 !important;
+            border-radius: 30px 30px !important;
+        }
+
+        .stat > .status{
+            border: 1px #212121 !important;
+            border-radius: 30px 30px !important;
+            width: 100% !important;
+        }
 
         .logo-section > .brand-logo{
             padding: 20px 20px;
             font-size: 30pt;
+        }
+
+        .artstyle-section{
+            padding-bottom: 15px;
+/*            padding-top: 20px;*/
+            align-items: center;
+            flex-shrink: 0;
+/*            display: flex;*/
+            margin-left: 1.5rem;
+            margin-right: 1.5rem;
         }
 
         .section-footer{
@@ -139,7 +168,7 @@
 
 /*   EFFECTS     */
 
-        .logo-section, .brand-logo{
+        .logo-section, .brand-logo, a{
             -webkit-animation: bounceIn 0.7s ease-out;
             -moz-animation: bounceIn 0.7s ease-out;
             -o-animation: bounceIn 0.7s ease-out;
@@ -154,31 +183,41 @@
 
         .logo-section > .brand-logo:hover{
             height: 50px !important;
-            color: #ffc40c !important;
+            color: #fff !important;
+            text-shadow: 0px 1.2px 2px #212121;
             padding: 20px 20px;
-            font-size: 30pt;
+/*            font-size: 30pt;*/
         }
 
-        a:focus{
+
+        .one:hover{
+            color: #fff !important;
+        }
+
+        .two:hover{
+            color: #fff !important;
+        }
+        .three:hover{
+            color: #fff !important;
+        }
+        .four:hover{
+            color: #fff !important;
+        }
+
+/*        a.selected{
             background-color: #ffc40c !important;
             border-radius: 30px 30px !important;
-        }
+        }*/
 
-        a:active{
+/*        .one, .two, .three, .four:focus{
             background-color: #ffc40c !important;
             border-radius: 30px 30px !important;
-        }
+        }*/
 
-        .card-reveal{
-            opacity: 0.8;
-            overflow: hidden !important;
-            background-color: #212121 !important;
-            color: #ffc40c !important;
-        }
-
-        .art-description{
-            margin-top: 0 !important;
-        }
+/*        .one, .two, .three, .four:active{
+            background-color: #ffc40c !important;
+            border-radius: 30px 30px !important;
+        }*/
 
 
     </style>
@@ -197,35 +236,41 @@
             </div>
         </div>
     </nav>
-    <ul id="nav-mobile" class="sidenav sidenav-fixed" style="transform: translateX(0%);">
-            <div class="logo-section center">
-                <a href="#" class="brand-logo black-text center">AniNeru</a>
+    <ul id="nav-mobile" class="sidenav sidenav-fixed grey" style="transform: translateX(0%);">
+            <div class="logo-section center ">
+                <a href="#" class="no-effect brand-logo amber-text center ">AniNeru</a>
             </div>
 
-            <li class="stat">
-                <div class="col s12 m12 l12 center"> Status: OPEN</div>
-            </li>
+            <div class="stat center">
+                <div class="status center amber-text"> Status: OPEN</div>
+            </div>
 
             <div class="login-section">
                 <li>
-                    <a href="login.php">Log In<i class="material-icons black-text">person</i></a></a>
+                    <a class="one amber-text" href="login.php">Log In<i class="material-icons amber-text">person</i></a>
                 </li>
             </div>
 
             <div class="options-section">
                 <li>
-                    <a  href="index.php"><i class="material-icons black-text">home</i>Home</a>
-                    <a class="" href="">About Me<i class="material-icons black-text">information</i></a>
-                    <a class="" href="">Process<i class="material-icons black-text">close</i></a>
+                    <a class="two amber-text" href="index.php"><i class="material-icons amber-text">home</i>Home</a>
+                    <a class="four amber-text" href="">Terms & Conditions<i class="material-icons amber-text">help</i></a>
+                    <a class="three amber-text" href="">About AniNeru<i class="material-icons amber-text">information</i></a>
+
                 </li>
             </div>
 
-            <div class="artstyle-section">
+           <!--  <div class="artstyle-section bold">
                 <li>
                     <a href="index.php" class="collapsible header waves-effect waves-yellow" tabindex="0">Artstyles</a>
+                    <div class="collapsible-body">
+                        <ul>
+                            li
+                        </ul>
+                    </div>
                 </li>
                 
-            </div>
+            </div> -->
 
 
             <div class="section-footer grey-darken-4">
