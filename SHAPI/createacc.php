@@ -1,11 +1,12 @@
 <?php
 $error_message = $success_message = '';
+$email = $username = $password = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate email
     $email = $_POST['user'];
     $username = $_POST['username'];
-	$errors = array('user' => '', 'password' => '');
+	$errors = array('userE' => '', 'password' => '', 'userV' => '');
 	
 
     include('Admin\assets\config\db.php');
@@ -15,10 +16,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $check_result = $con->query($check_query);
 
     if ($check_result->num_rows > 0) {
-        $errors['user'] = 'Email already exists';					
-    } else {
+        $errors['userE'] = 'Email already exists';					
+    } 
+	elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+		$errors['userV'] = 'Please enter a valid email address';
+		
+	}
+	else {
         // Email is valid, proceed to password validation and database insertion
-        $password = $_POST['pass'];
+        $password = str_replace('*', '', $_POST['pass']);
 
         // Validate password (add your own password validation logic here)
         if (strlen($password) >= 11) {
@@ -26,11 +32,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             // Password is valid, proceed to database insertion
 
-            // Hash the password for security (you should use a more secure method in a real-world scenario)
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
             // Insert user data into the 'users' table
-            $insert_query = "INSERT INTO users (email, username, password, status) VALUES ('$email', '$username', '$hashedPassword', 'active')";
+            $insert_query = "INSERT INTO users (email, username, password, status) VALUES ('$email', '$username', '$password', 'Hiatus')";
 
             if ($con->query($insert_query) === TRUE) {
                 // Display success message using Materialize CSS
@@ -43,17 +46,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Close the connection
     $con->close();
+	
+
+		$modal = <<<EOT
+		<div id="modal1" class="modal center-align">
+			<div class="modal-content">
+				<h4>Registration Complete!</h4>
+			</div>
+			<div class="modal-footer">
+				<a href="login.php" class="modal-close waves-effect waves-green btn yellow darken-3">OK</a>
+			</div>
+		</div>
+		EOT;
 
 
-}
+			// Echo the modal box
+		echo $modal;
 
-$error_message = $success_message = '';
+		// Echo the JavaScript code to initialize the modal
+		echo '<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			var elems = document.querySelectorAll(".modal");
+			var instances = M.Modal.init(elems);
+			// Open the modal automatically
+			instances[0].open();
+		});
+		</script>';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
-}
+
+		}
+
+
+
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,6 +95,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 	<style type="text/css">
+
+		.modal{
+			width: 320px;
+			height: 190px;
+			align-items: center;
+		}
+
 /*GENERAL*/
 
 		*, *::before, *::after{
@@ -458,7 +490,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			height: 24px;
 			float: right;
 			position: relative;
-			margin-top: -26px;
+			margin-top: -50px;
 			right: 2px;
 			z-index: 2;
 			display: none;
@@ -535,6 +567,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		      </div>
 		        
 		    <div class='box-login'>
+		
 				<form method="POST" id="registerForm" name="register_form">
 					<div class='fieldset-body' id='login_form'>
 						<a href="login.php" class="back amber-text right">« Back to Login</a>
@@ -545,19 +578,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 							</div>	
 						</div>
 						
-						<div id="error-message"></div>
- 					    <div id="success-message"></div>
+						
 
 						<p class='field'>
 							<label for='username'>USERNAME</label>
 							<input type='text' id='username' name='username' title='What name do you wanna called?' required />
 						</p>
-						<p class='field'>
+						<p class='field' style="margin: 0;">
 							<label for='user'>E-MAIL</label>
 							<input type='text' id='user' name='user' title='Put your Email here' required />
-							<div class="red-text"><?php if (isset($errors['user'])) echo $errors['user']; ?></div>
+							<div class="red-text"><?php if (isset($errors['userE'])) echo $errors['userE']; if (isset($errors['userV'])) echo $errors['userV'];?></div>
 						</p>
-						<p class='field'>
+						<p class='field' style="margin: 0;">
 							<label for='pass'>PASSWORD</label>
 							<input type='password' id='pass' name='pass' title='Input your Password' required />
 							<div class="red-text"><?php if (isset($errors['password'])) echo $errors['password']; ?></div>
@@ -572,6 +604,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 					</div>
 				</form>
 		    </div>
+			<div id="error-message"></div>
+ 			<div id="success-message"></div>
 		</div>
 <!-- 		  <div class='box-info'>
 		  	<div class="row">
