@@ -240,10 +240,31 @@
             <div class="logo-section center ">
                 <a href="#" class="no-effect brand-logo amber-text center ">AniNeru</a>
             </div>
-
             <div class="stat center">
-                <div class="status center amber-text"> Status: OPEN</div>
-            </div>
+    <?php
+    include('Admin\assets\config\db.php');
+
+    $email = 'neru@gmail.com';
+    $statusQuery = "SELECT status FROM users WHERE email = ?";
+    $statusStmt = $con->prepare($statusQuery);
+    $statusStmt->bind_param('s', $email);
+    $statusStmt->execute();
+    $statusStmt->bind_result($userStatus);
+
+    // Check if the status is fetched successfully
+    if ($statusStmt->fetch()) {
+        $statusStmt->close();
+    } else {
+        $userStatus = 'Hiatus';
+        $statusStmt->close();
+    }
+    ?>
+
+    <div class="status center <?php echo $userStatus === 'Active' ? 'green-text' : 'amber-text'; ?>">
+        Status: <?php echo $userStatus; ?>
+    </div>
+</div>
+
 
             <div class="login-section">
                 <li>
