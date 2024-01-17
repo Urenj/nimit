@@ -1,6 +1,7 @@
  <!DOCTYPE html>
 <html>
 	
+    <?php include('cardodalisay/about.css') ?>
 	<?php include('templates/header.php'); ?>
 
         <main>
