@@ -4,7 +4,7 @@ $error_message = $success_message = '';
 $modal = <<<EOT
 <div id="modal1" class="modal center-align" >
 	<div class="modal-content">
-		<h4 style = 'position: relative; top: 20px;'>Commission Request Sent!</h4>
+		<h4 style='position: relative; top: 20px;'>Commission Request Sent!</h4>
 	</div>
 	<div class="modal-footer">
 		<a href="index.php" class="modal-close waves-effect waves-green btn yellow darken-3">OK</a>
@@ -14,48 +14,51 @@ EOT;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
-    $client_email = $_POST['client_email'];
-    $client_name = $_POST['client_name'];
-    $duedate = $_POST['duedate'];
-    $art_style = $_POST['art_style'];
-    $details = $_POST['details'];
+    $client_email = $_POST['client_email'] ?? '';
+    $client_name = $_POST['client_name'] ?? '';
+    $duedate = $_POST['duedate'] ?? '';
+    $art_style = $_POST['art_style'] ?? '';
+    $details = $_POST['details'] ?? '';
+    $description = $_POST['description'] ?? '';
 
-    // Add your database connection code here
-    include('Admin\assets\config\db.php');
-	
-    // Insert data into the 'commission' table
-    $insert_query = $con->prepare("INSERT INTO commission (email, name, due_date, art_style, details) VALUES (?, ?, ?, ?, ?)");
-    $insert_query->bind_param("sssss", $client_email, $client_name, $duedate, $art_style, $details);
-
-    if ($insert_query->execute()) {
-	
-
-			// Echo the modal box
-		echo $modal;
-
-		// Echo the JavaScript code to initialize the modal
-		echo '<script>
-		document.addEventListener("DOMContentLoaded", function() {
-			var elems = document.querySelectorAll(".modal");
-			var instances = M.Modal.init(elems);
-			// Open the modal automatically
-			instances[0].open();
-		});
-		</script>';
+    // Validate that required fields are not empty
+    if (empty($client_email) || empty($client_name) || empty($duedate) || empty($art_style)) {
+        $error_message = 'Please fill in all required fields.';
     } else {
-        // Display error message
-        $error_message = 'Error: ' . $insert_query->error;
+        // Add your database connection code here
+        include('Admin\assets\config\db.php');
+
+        // Insert data into the 'commission' table
+        $insert_query = $con->prepare("INSERT INTO commission (email, name, due_date, art_style, details, description) VALUES (?, ?, ?, ?, ?, ?)");
+        $insert_query->bind_param("ssssss", $client_email, $client_name, $duedate, $art_style, $details, $description);
+
+        if ($insert_query->execute()) {
+            // Echo the modal box
+            echo $modal;
+
+            // Echo the JavaScript code to initialize the modal
+            echo '<script>
+            document.addEventListener("DOMContentLoaded", function() {
+                var elems = document.querySelectorAll(".modal");
+                var instances = M.Modal.init(elems);
+                // Open the modal automatically
+                instances[0].open();
+            });
+            </script>';
+        } else {
+            // Display error message
+            $error_message = 'Error: ' . $insert_query->error;
+        }
+
+        // Close the statement
+        $insert_query->close();
+
+        // Close the database connection
+        $con->close();
     }
-
-    // Close the statement
-    $insert_query->close();
-
-    // Close the database connection
-    $con->close();
 }
-    
-
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -490,6 +493,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 							</div>
 						</div>
 
+						<div class="row art">
+							<div class="col s12 m12 l12">
+								<div class="input-field col s12">
+									<select class="dropdown" name="details" required>
+										<option value="" disabled selected>Commission Details</option>
+										<option value="Bust/Headshot">Bust/Headshot</option>
+										<option value="Half Body">Half Body</option>
+										<option value="Whole Body">Whole Body</option>
+										<option value="" disabled selected>With background</option>
+										<option value="Bust/Headshot w/BG ">Bust/Headshot w/BG</option>
+										<option value="Half Body w/BG">Half Body w/BG</option>
+										<option value="Whole Body w/BG">Whole Body w/BG</option>
+									</select>
+									<label class="amber-text">Details</label>
+								</div>
+							</div>
+						</div>
+
 						<div class="row date">
 				        <p class='field'>
 				            <label for='duedate'>Due Date</label>
@@ -499,13 +520,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 					<div class="row descrip">
-				        <div class="col s12 m12 l12">
-				            <div class="input-field col s12">
-				                <textarea id="details" name="details" class="materialize-textarea"></textarea>
-				                <label for="details" class="amber-text">Details (such as character palette, male/female, etc.)</label>
-				            </div>
-				        </div>
-				    </div>
+						<div class="col s12 m12 l12">
+							<div class="input-field col s12">
+								<textarea id="description" name="description" class="materialize-textarea"></textarea>
+								<label for="description" class="amber-text">Description (such as character palette, male/female, etc.)</label>
+							</div>
+						</div>
+					</div>
 
 						<input type='submit' id='do_register' value='SUBMIT' title='Submit' />
 					</div>
