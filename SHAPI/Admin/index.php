@@ -1,58 +1,60 @@
 <?php
-    include ('assets/config/db.php');
-    $sql = 'SELECT id, client_name, contact_info, due, style, client_details, client_description FROM contract';
-    $result = mysqli_query($con, $sql);
+include ('assets/config/db.php');
 
-// Assume you have a query to fetch the current status for the user with the given $email
-$email = 'neru@gmail.com';
-
-// Assume you have a query to fetch the current status for the user with the given $email
-$query = "SELECT status FROM users WHERE email = ?";
-$stmt = $con->prepare($query);
-$stmt->bind_param('s', $email);
-$stmt->execute();
-$stmt->bind_result($userStatus);
-
-// Check if the status is fetched successfully
-if ($stmt->fetch()) {
-    // The status is fetched successfully
-
-    // You can close the statement here if you're not fetching anything else
-    $stmt->close();
-} else {
-    // Error fetching the status
-    $userStatus = 'Hiatus'; // Default to hiatus if there's an error
-    $stmt->close();
+// Delete operation
+if (isset($_GET['id'])) {
+    $rowId = $_GET['id'];
+    $deleteSql = "DELETE FROM contract WHERE id = $rowId";
+    $con->query($deleteSql);
+    header("location: index.php");
+    $con->close();
+    exit;
 }
 
+// Fetch user status
+$email = 'neru@gmail.com';
+$statusQuery = "SELECT status FROM users WHERE email = ?";
+$statusStmt = $con->prepare($statusQuery);
+$statusStmt->bind_param('s', $email);
+$statusStmt->execute();
+$statusStmt->bind_result($userStatus);
+
+// Check if the status is fetched successfully
+if ($statusStmt->fetch()) {
+    $statusStmt->close();
+} else {
+    $userStatus = 'Hiatus';
+    $statusStmt->close();
+}
+
+// Update user status
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['newStatus'])) {
     $newStatus = $_POST['newStatus'];
-
-    // Assume you have a column named 'status' in your 'users' table
     $updateQuery = "UPDATE users SET status = ? WHERE email = ?";
     $updateStmt = $con->prepare($updateQuery);
     $updateStmt->bind_param('ss', $newStatus, $email);
 
     if ($updateStmt->execute()) {
-        echo 'Status updated successfully';
+        $userStatus = $newStatus; 
     } else {
         echo 'Error updating status: ' . $updateStmt->error;
     }
 
-    // Close the update statement
     $updateStmt->close();
 }
 
+// Fetch data
+$sql = 'SELECT id, client_name, contact_info, due, style, client_details, client_description FROM contract';
+$result = mysqli_query($con, $sql);
 
+// Fetch client count
+$clientquery = "SELECT * FROM contract";
+$totalclient = mysqli_query($con, $clientquery);
+$totalresult = ($totalclient) ? mysqli_num_rows($totalclient) : 0;
 
-// Close the connection (for demonstration purposes, adjust as needed in your actual code)
+// Close the connection
 $con->close();
 ?>
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,25 +69,76 @@ $con->close();
     <script defer src="assets\js\dashboard.js"></script>
 </head>
 
+<style>
+    .toggle-button {
+    display: inline-block;
+    margin: 10px;
+}
+
+.slider {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+    background-color: #ccc;
+    border-radius: 15px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    transition: background-color 0.5s ease;
+}
+
+.slider:before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: white;
+    transition: transform 0.3s ease;
+}
+
+.slider span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #555;
+    font-size: 14px;
+}
+
+.toggle-button input[type="hidden"]:checked + .slider {
+    background-color: #ffc40c;
+}
+
+.toggle-button input[type="hidden"]:checked + .slider:before {
+    transform: translateX(30px);
+}
+
+</style>
 <body>
     <div class="main-wrapper">
         <?php
         include "admin-nav.php";
         ?>
         <article class="wrapper-dashboard">
-        <div class="dashboard">
+            <div class="dashboard">
                 <div class="status-wrapper">
                     <fieldset class="status-box">
                         <legend class="legend">Status</legend>
-                             <div class="toggle-button">
-                             <input type="checkbox" id="toggle" onchange="updateStatus()" <?php echo ($userStatus == 'Active') ? 'checked' : ''; ?>>
-                                <label for="toggle" class="slider"></label>
-                             </div>
-                             <p id="status"><?php echo ucfirst($userStatus); ?></p>
-
+                        <div class="toggle-button">
+                            <form method="post" action="">
+                                <input type="hidden" name="newStatus" value="<?php echo $userStatus === 'Active' ? 'Hiatus' : 'Active'; ?>">
+                                <button type="submit" class="slider" onclick="updateStatus()"></button>
+                            </form>
+                        </div>
+                        <p id="status"><?php echo ucfirst($userStatus); ?></p>
                     </fieldset>
                 </div>
-                <div class="current-client-wrapper">
+                
+<div class="current-client-wrapper">
                     <fieldset class="current-client-box">
                         <legend class="legend">Current Clients</legend> 
                        
@@ -128,6 +181,7 @@ $con->close();
                             </thead>
 
                             <tbody>
+                            
                             <?php
                            include ('assets/config/db.php');
                             if($result ->num_rows > 0)
@@ -144,7 +198,12 @@ $con->close();
                                               <td>" . htmlspecialchars($row['style']) . "</td>
                                               <td>" . htmlspecialchars($row['client_details']) . "</td>
                                               <td>" . htmlspecialchars($row['client_description']) . "</td>
-                                              <td><a class='waves-effect waves-light btn yellow darken-2' href='\Admin\done.php?id= $row[id]'>Done</a></td>
+                                              <td>
+                                                <form action='' method='GET'>
+                                                    <input type='hidden' name='id' value='{$row['id']}'>
+                                                    <button type='submit' class='waves-effect waves-light btn yellow darken-2'>Done</button>
+                                                </form>
+                                              </td>
                                              </tr> 
                                            ";
                                 }
@@ -158,31 +217,8 @@ $con->close();
                     </fieldset>
                 </div>
             </div>
-        </div>
         </article>
-        <script>
-            function updateStatus() {
-                var toggle = document.getElementById('toggle');
-                var statusLabel = document.getElementById('statusLabel');
-                var newStatus = toggle.checked ? 'Active' : 'Hiatus';
-
-                statusLabel.textContent = newStatus;
-
-                // Send an AJAX request to update the database
-                $.ajax({
-                    url: 'update_status.php', // Replace with the actual file handling the update
-                    method: 'POST',
-                    data: { newStatus: newStatus },
-                    success: function (response) {
-                        console.log('Database updated successfully');
-                    },
-                    error: function (error) {
-                        console.error('Error updating database:', error);
-                    }
-                });
-            }
-    </script>
+    </div>
 </body>
 </html>
-
 

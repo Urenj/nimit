@@ -1,68 +1,65 @@
 <?php
 $error_message = $success_message = '';
-$email = $username = $password = '';
+
+$modal = <<<EOT
+<div id="modal1" class="modal center-align" >
+	<div class="modal-content">
+		<h4 style='position: relative; top: 20px;'>Commission Request Sent!</h4>
+	</div>
+	<div class="modal-footer">
+		<a href="index.php" class="modal-close waves-effect waves-green btn yellow darken-3">OK</a>
+	</div>
+</div>
+EOT;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
-    $client_name = $_POST['client_name'];
-    $client_email = $_POST['client_email'];
-    $art_style = $_POST['art_style'];
-    $duedate = $_POST['duedate'];
-    $details = $_POST['details'];
-    $description = $_POST['description'];
+    $client_email = $_POST['client_email'] ?? '';
+    $client_name = $_POST['client_name'] ?? '';
+    $duedate = $_POST['duedate'] ?? '';
+    $art_style = $_POST['art_style'] ?? '';
+    $details = $_POST['details'] ?? '';
+    $description = $_POST['description'] ?? '';
 
-    // Insert data into the 'your_table_name' table
-    $insert_query = $con->prepare("INSERT INTO your_table_name (email, username, password, client_name, client_email, art_style, due_date, details, description, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'Hiatus')");
-    $insert_query->bind_param("sssssssss", $email, $username, $password, $client_name, $client_email, $art_style, $duedate, $details, $description);
-
-    if ($insert_query->execute()) {
-        // Display success message
-        $success_message = 'Data added successfully!';
+    // Validate that required fields are not empty
+    if (empty($client_email) || empty($client_name) || empty($duedate) || empty($art_style)) {
+        $error_message = 'Please fill in all required fields.';
     } else {
-        // Display error message
-        $error_message = 'Error: ' . $insert_query->error;
+        // Add your database connection code here
+        include('Admin\assets\config\db.php');
+
+        // Insert data into the 'commission' table
+        $insert_query = $con->prepare("INSERT INTO commission (email, name, due_date, art_style, details, description) VALUES (?, ?, ?, ?, ?, ?)");
+        $insert_query->bind_param("ssssss", $client_email, $client_name, $duedate, $art_style, $details, $description);
+
+        if ($insert_query->execute()) {
+            // Echo the modal box
+            echo $modal;
+
+            // Echo the JavaScript code to initialize the modal
+            echo '<script>
+            document.addEventListener("DOMContentLoaded", function() {
+                var elems = document.querySelectorAll(".modal");
+                var instances = M.Modal.init(elems);
+                // Open the modal automatically
+                instances[0].open();
+            });
+            </script>';
+        } else {
+            // Display error message
+            $error_message = 'Error: ' . $insert_query->error;
+        }
+
+        // Close the statement
+        $insert_query->close();
+
+        // Close the database connection
+        $con->close();
     }
-
-    // Close the statement
-    $insert_query->close();
 }
-
-// Close the connection
-$con->close();
-
-    
-	
-
-		$modal = <<<EOT
-		<div id="modal1" class="modal center-align">
-			<div class="modal-content">
-				<h4>Registration Complete!</h4>
-			</div>
-			<div class="modal-footer">
-				<a href="login.php" class="modal-close waves-effect waves-green btn yellow darken-3">OK</a>
-			</div>
-		</div>
-		EOT;
-
-
-			// Echo the modal box
-		echo $modal;
-
-		// Echo the JavaScript code to initialize the modal
-		echo '<script>
-		document.addEventListener("DOMContentLoaded", function() {
-			var elems = document.querySelectorAll(".modal");
-			var instances = M.Modal.init(elems);
-			// Open the modal automatically
-			instances[0].open();
-		});
-		</script>';
-
-
-
-
-
 ?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,9 +77,9 @@ $con->close();
 
 	<style type="text/css">
 
-		.modal{
+		#modal1{
 			width: 320px;
-			height: 190px;
+			height: 195px;
 			align-items: center;
 		}
 
@@ -459,7 +456,7 @@ $con->close();
 		      </div>
 		        
 		    <div class='box-login'>
-				<form method="POST" id="commsForm" name="comms_form" action="Admin/index.php">
+				<form method="POST" id="commsForm" name="comms_form" action="">
 
 					<div class='fieldset-body' id='login_form'>
 						<a href="index.php" class="back amber-text right">« Back to home</a>
@@ -483,16 +480,37 @@ $con->close();
 						<div class="row art">
 							<div class="col s12 m12 l12">
 								<div class="input-field col s12 ">
-    								<select class="dropdown" name="art_style">
-    								  <option value="" disabled selected>Choose Artstyle</option>
-    								  <option value="1">Original Artstyle</option>
-    								  <option value="2">Chibi</option>
-    								  <option value="3">Digital Watercolor</option>
-    								  <option value="4">Graphic Stylization</option>
-    								  <option value="5">Cute Aesthetic Style</option>
+    								<select class="dropdown" name="art_style" required>
+									<option value="" disabled selected>Choose Artstyle</option>
+									<option value="Original Artstyle">Original Artstyle</option>
+									<option value="Chibi">Chibi</option>
+									<option value="Digital Watercolor">Digital Watercolor</option>
+									<option value="Graphic Stylization">Graphic Stylization</option>
+									<option value="Cute Aesthetic Style">Cute Aesthetic Style</option>
     								</select>
     								<label class="amber-text">Artstyles</label>
   								</div>
+							</div>
+						</div>
+
+						<div class="row art">
+							<div class="col s12 m12 l12">
+								<div class="input-field col s12">
+									<select class="dropdown" name="details" required>
+
+										<option value="" disabled selected>With background</option>
+										<option value="Bust/Headshot w/BG ">Bust/Headshot w/BG</option>
+										<option value="Half Body w/BG">Half Body w/BG</option>
+										<option value="Whole Body w/BG">Whole Body w/BG</option>
+
+										<option value="" disabled selected>Commission Details</option>
+										<option value="Bust/Headshot">Bust/Headshot</option>
+										<option value="Half Body">Half Body</option>
+										<option value="Whole Body">Whole Body</option>
+										
+									</select>
+									<label class="amber-text">Details</label>
+								</div>
 							</div>
 						</div>
 
@@ -505,18 +523,19 @@ $con->close();
 
 
 					<div class="row descrip">
-				        <div class="col s12 m12 l12">
-				            <div class="input-field col s12">
-				                <textarea id="details" name="details" class="materialize-textarea"></textarea>
-				                <label for="details" class="amber-text">Details (such as character palette, male/female, etc.)</label>
-				            </div>
-				        </div>
-				    </div>
+						<div class="col s12 m12 l12">
+							<div class="input-field col s12">
+								<textarea id="description" name="description" class="materialize-textarea" required></textarea>
+								<label for="description" class="amber-text">Description (such as character palette, male/female, etc.)</label>
+							</div>
+						</div>
+					</div>
 
 						<input type='submit' id='do_register' value='SUBMIT' title='Submit' />
 					</div>
 				</form>
 		    </div>
+		
 			<div id="error-message"></div>
  			<div id="success-message"></div>
 		</div>

@@ -2,6 +2,18 @@
 $error_message = $success_message = '';
 $email = $username = $password = '';
 
+$modal = <<<EOT
+<div id="modal1" class="modal center-align">
+	<div class="modal-content">
+		<h4 style = 'position: relative; top: 20px;' >Registration Complete!</h4>
+	</div>
+	<div class="modal-footer">
+		<a href="login.php" class="modal-close waves-effect waves-green btn yellow darken-3">OK</a>
+	</div>
+</div>
+EOT;
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate email
     $email = $_POST['user'];
@@ -38,6 +50,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($con->query($insert_query) === TRUE) {
                 // Display success message using Materialize CSS
                 $success_message = 'Account added successfully!';
+
+						// Echo the modal box
+				echo $modal;
+
+				// Echo the JavaScript code to initialize the modal
+				echo '<script>
+				document.addEventListener("DOMContentLoaded", function() {
+					var elems = document.querySelectorAll(".modal");
+					var instances = M.Modal.init(elems);
+					// Open the modal automatically
+					instances[0].open();
+				});
+				</script>';
+				
             } else {
                 $error_message = 'Error: ' . $insert_query . '<br>' . $con->error;
             }
@@ -48,30 +74,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $con->close();
 	
 
-		$modal = <<<EOT
-		<div id="modal1" class="modal center-align">
-			<div class="modal-content">
-				<h4>Registration Complete!</h4>
-			</div>
-			<div class="modal-footer">
-				<a href="login.php" class="modal-close waves-effect waves-green btn yellow darken-3">OK</a>
-			</div>
-		</div>
-		EOT;
 
-
-			// Echo the modal box
-		echo $modal;
-
-		// Echo the JavaScript code to initialize the modal
-		echo '<script>
-		document.addEventListener("DOMContentLoaded", function() {
-			var elems = document.querySelectorAll(".modal");
-			var instances = M.Modal.init(elems);
-			// Open the modal automatically
-			instances[0].open();
-		});
-		</script>';
+	
 
 
 		}
@@ -587,7 +591,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 						<p class='field' style="margin: 0;">
 							<label for='user'>E-MAIL</label>
 							<input type='text' id='user' name='user' title='Put your Email here' required />
-							<div class="red-text"><?php if (isset($errors['userE'])) echo $errors['userE']; if (isset($errors['userV'])) echo $errors['userV'];?></div>
 						</p>
 						<p class='field' style="margin: 0;">
 							<label for='pass'>PASSWORD</label>
