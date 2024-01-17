@@ -90,11 +90,12 @@
 		}
 
 		.card{
-    		border-radius: 30px 30px !important;
+    		background-color: #2D2F31;
+			border: 1px solid rgba(255,255,255,0.2);
+			border-radius: 7px	;
 			width: 600px;
     		position: relative;
     		z-index: 1;
-    		background-color: #2D2F31;
 		}
 
 		.card-title{
@@ -145,6 +146,7 @@
 	    .btn{
             border-radius: 20px 20px !important;
             background-color: #212121;
+            width: 60%;
 	    }
 
 	    .btn:hover{
@@ -161,6 +163,8 @@
 	    	text-decoration: underline;
 	    	color: #f8bbd0 !important;
 	    }
+
+
 
 
 
@@ -217,7 +221,7 @@
 		      		<div class="buttons-bc center">
 		      			<a href="index.php" class="amber-text  center">◃ Back
                 		</a>
-                		<a href="#" class="amber-text center">Commission Now! ▹
+                		<a href="comms-form.php" class="amber-text center">Commission Now! ▹
                 		</a>
 		      		</div>
 		        </div>
@@ -232,23 +236,6 @@
     <!--JavaScript at end of body for optimized loading-->
     <script type="text/javascript" src="js/materialize.min.js"></script>
     <script>
-
-		// function openLoginInfo() {
-		//     jQuery('.b-form').css("opacity","0.01");
-		//     jQuery('.box-form').css("left","-37%");
-		//     jQuery('.box-info').css("right","-37%");
-		// }
-		
-		// function closeLoginInfo() {
-		//     jQuery('.b-form').css("opacity","1");
-		//     jQuery('.box-form').css("left","0px");
-		//     jQuery('.box-info').css("right","-5px"); 
-		// }
-		
-		// jQuery(window).on('resize', function(){
-		//     closeLoginInfo();
-		// });
-
 
     	function pashPash() {
     	    var temp = document.getElementById("pass");
