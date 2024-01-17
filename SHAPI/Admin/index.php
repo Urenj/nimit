@@ -1,34 +1,39 @@
 <?php
-    include ('assets/config/db.php');
-    $sql = 'SELECT id, client_name, contact_info, due, style, client_details, client_description FROM contract';
-    $result = mysqli_query($con, $sql);
+include ('assets/config/db.php');
 
-// Assume you have a query to fetch the current status for the user with the given $email
-$email = 'neru@gmail.com';
-
-// Assume you have a query to fetch the current status for the user with the given $email
-$query = "SELECT status FROM users WHERE email = ?";
-$stmt = $con->prepare($query);
-$stmt->bind_param('s', $email);
-$stmt->execute();
-$stmt->bind_result($userStatus);
-
-// Check if the status is fetched successfully
-if ($stmt->fetch()) {
-    // The status is fetched successfully
-
-    // You can close the statement here if you're not fetching anything else
-    $stmt->close();
-} else {
-    // Error fetching the status
-    $userStatus = 'Hiatus'; // Default to hiatus if there's an error
-    $stmt->close();
+// Delete operation
+if (isset($_GET['id'])) {
+    $rowId = $_GET['id'];
+    $deleteSql = "DELETE FROM contract WHERE id = $rowId";
+    $con->query($deleteSql);
+    header("location: index.php");
+    $con->close();
+    exit;
 }
 
+// Fetch data
+$sql = 'SELECT id, client_name, contact_info, due, style, client_details, client_description FROM contract';
+$result = mysqli_query($con, $sql);
+
+// Fetch user status
+$email = 'neru@gmail.com';
+$statusQuery = "SELECT status FROM users WHERE email = ?";
+$statusStmt = $con->prepare($statusQuery);
+$statusStmt->bind_param('s', $email);
+$statusStmt->execute();
+$statusStmt->bind_result($userStatus);
+
+// Check if the status is fetched successfully
+if ($statusStmt->fetch()) {
+    $statusStmt->close();
+} else {
+    $userStatus = 'Hiatus';
+    $statusStmt->close();
+}
+
+// Update user status
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['newStatus'])) {
     $newStatus = $_POST['newStatus'];
-
-    // Assume you have a column named 'status' in your 'users' table
     $updateQuery = "UPDATE users SET status = ? WHERE email = ?";
     $updateStmt = $con->prepare($updateQuery);
     $updateStmt->bind_param('ss', $newStatus, $email);
@@ -39,17 +44,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['newStatus'])) {
         echo 'Error updating status: ' . $updateStmt->error;
     }
 
-    // Close the update statement
     $updateStmt->close();
 }
 
-
-
-// Close the connection (for demonstration purposes, adjust as needed in your actual code)
+// Close the connection
 $con->close();
 ?>
-
-
 
 
 
@@ -128,6 +128,7 @@ $con->close();
                             </thead>
 
                             <tbody>
+                            
                             <?php
                            include ('assets/config/db.php');
                             if($result ->num_rows > 0)
@@ -144,7 +145,12 @@ $con->close();
                                               <td>" . htmlspecialchars($row['style']) . "</td>
                                               <td>" . htmlspecialchars($row['client_details']) . "</td>
                                               <td>" . htmlspecialchars($row['client_description']) . "</td>
-                                              <td><a class='waves-effect waves-light btn yellow darken-2' href='\Admin\done.php?id= $row[id]'>Done</a></td>
+                                              <td>
+                                                <form action='' method='GET'>
+                                                    <input type='hidden' name='id' value='{$row['id']}'>
+                                                    <button type='submit' class='waves-effect waves-light btn yellow darken-2'>Done</button>
+                                                </form>
+                                              </td>
                                              </tr> 
                                            ";
                                 }
