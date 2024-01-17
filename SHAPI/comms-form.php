@@ -1,49 +1,34 @@
 <?php
 $error_message = $success_message = '';
-$email = $username = $password = '';
+
+$modal = <<<EOT
+<div id="modal1" class="modal center-align" >
+	<div class="modal-content">
+		<h4 style = 'position: relative; top: 20px;'>Commission Request Sent!</h4>
+	</div>
+	<div class="modal-footer">
+		<a href="index.php" class="modal-close waves-effect waves-green btn yellow darken-3">OK</a>
+	</div>
+</div>
+EOT;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
-    $client_name = $_POST['client_name'];
     $client_email = $_POST['client_email'];
-    $art_style = $_POST['art_style'];
+    $client_name = $_POST['client_name'];
     $duedate = $_POST['duedate'];
+    $art_style = $_POST['art_style'];
     $details = $_POST['details'];
-    $description = $_POST['description'];
 
-    // Insert data into the 'your_table_name' table
-    $insert_query = $con->prepare("INSERT INTO your_table_name (email, username, password, client_name, client_email, art_style, due_date, details, description, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'Hiatus')");
-    $insert_query->bind_param("sssssssss", $email, $username, $password, $client_name, $client_email, $art_style, $duedate, $details, $description);
+    // Add your database connection code here
+    include('Admin\assets\config\db.php');
+	
+    // Insert data into the 'commission' table
+    $insert_query = $con->prepare("INSERT INTO commission (email, name, due_date, art_style, details) VALUES (?, ?, ?, ?, ?)");
+    $insert_query->bind_param("sssss", $client_email, $client_name, $duedate, $art_style, $details);
 
     if ($insert_query->execute()) {
-        // Display success message
-        $success_message = 'Data added successfully!';
-    } else {
-        // Display error message
-        $error_message = 'Error: ' . $insert_query->error;
-    }
-
-    // Close the statement
-    $insert_query->close();
-}
-
-// Close the connection
-$con->close();
-
-    
 	
-
-		$modal = <<<EOT
-		<div id="modal1" class="modal center-align">
-			<div class="modal-content">
-				<h4>Registration Complete!</h4>
-			</div>
-			<div class="modal-footer">
-				<a href="login.php" class="modal-close waves-effect waves-green btn yellow darken-3">OK</a>
-			</div>
-		</div>
-		EOT;
-
 
 			// Echo the modal box
 		echo $modal;
@@ -57,12 +42,21 @@ $con->close();
 			instances[0].open();
 		});
 		</script>';
+    } else {
+        // Display error message
+        $error_message = 'Error: ' . $insert_query->error;
+    }
 
+    // Close the statement
+    $insert_query->close();
 
-
-
+    // Close the database connection
+    $con->close();
+}
+    
 
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,9 +74,9 @@ $con->close();
 
 	<style type="text/css">
 
-		.modal{
+		#modal1{
 			width: 320px;
-			height: 190px;
+			height: 195px;
 			align-items: center;
 		}
 
@@ -459,7 +453,7 @@ $con->close();
 		      </div>
 		        
 		    <div class='box-login'>
-				<form method="POST" id="commsForm" name="comms_form" action="Admin/index.php">
+				<form method="POST" id="commsForm" name="comms_form" action="">
 
 					<div class='fieldset-body' id='login_form'>
 						<a href="index.php" class="back amber-text right">« Back to home</a>
@@ -483,13 +477,13 @@ $con->close();
 						<div class="row art">
 							<div class="col s12 m12 l12">
 								<div class="input-field col s12 ">
-    								<select class="dropdown" name="art_style">
-    								  <option value="" disabled selected>Choose Artstyle</option>
-    								  <option value="1">Original Artstyle</option>
-    								  <option value="2">Chibi</option>
-    								  <option value="3">Digital Watercolor</option>
-    								  <option value="4">Graphic Stylization</option>
-    								  <option value="5">Cute Aesthetic Style</option>
+    								<select class="dropdown" name="art_style" required>
+									<option value="" disabled selected>Choose Artstyle</option>
+									<option value="Original Artstyle">Original Artstyle</option>
+									<option value="Chibi">Chibi</option>
+									<option value="Digital Watercolor">Digital Watercolor</option>
+									<option value="Graphic Stylization">Graphic Stylization</option>
+									<option value="Cute Aesthetic Style">Cute Aesthetic Style</option>
     								</select>
     								<label class="amber-text">Artstyles</label>
   								</div>
@@ -517,6 +511,7 @@ $con->close();
 					</div>
 				</form>
 		    </div>
+		
 			<div id="error-message"></div>
  			<div id="success-message"></div>
 		</div>
