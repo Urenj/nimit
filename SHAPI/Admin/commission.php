@@ -2,6 +2,16 @@
     include ('assets/config/db.php');
     $sql = 'SELECT client_id, name, email, due_date, art_style, details FROM commission';
     $result = mysqli_query($con, $sql);
+
+    if (isset($_GET['client_id']) ) {
+        $rowid = $_GET['client_id'];
+        $deletesql = "DELETE FROM commission WHERE client_id = $rowid";
+        $con->query($deletesql);
+        header("location: commission.php ");
+        $con->close();
+        exit;
+    }
+    
 ?>
 
 <!DOCTYPE html>
@@ -45,19 +55,23 @@
 
                         foreach ($rows as $row) {
                             echo "
-                                <tr>
+                                <tr style = 'align-items: baseline'>
                                     <td>$row[client_id]</td>
                                     <td>" . htmlspecialchars($row["name"])  . "</td>
                                     <td>" . htmlspecialchars($row["email"]) . "</td>
                                     <td>" . htmlspecialchars($row["due_date"]) . "</td>
                                     <td>" . htmlspecialchars($row["art_style"])  . "</td>
                                     <td>" . htmlspecialchars($row["details"])  . "</td>
-                                    <td style='display: flex; flex-direction: row; height: auto; width: auto;'>
+                                    <td style='display: flex; flex-direction: row; height: auto; width: auto;' >
                                     <form action='confirm.php' method='post'>
                                         <input type='hidden' name='client_id' value='" . htmlspecialchars($row["client_id"]) . "'>
                                         <button type='submit' class='waves-effect waves-light btn yellow darken-2' name='confirm'>Confirm</button>
                                     </form>
-                                    <a class='waves-effect waves-light btn deep-orange' id='decline' href='\Admin\decline.php?client_id=$row[client_id]'>Decline</a>
+                                    <form action='' method='GET'>
+                                        <input type='hidden' name='client_id' value='{$row['client_id']}'>
+                                        <button type='submit' class='waves-effect waves-light btn deep-orange'>Decline</button>
+                                     </form>
+                                   
                                 </td>
                                 </tr>
                             ";

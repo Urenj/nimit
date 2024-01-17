@@ -47,9 +47,14 @@
     border-radius: 15px;
 }
 
+td {
+    overflow-wrap: break-word;
+    font-size: 12px;
+}
 
 th{
     font-weight: 600;
+    font-size: 14px;
     color: #D5C596;
 }
 
