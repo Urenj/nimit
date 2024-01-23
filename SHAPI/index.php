@@ -1,34 +1,105 @@
  <!DOCTYPE html>
 <html>
 	
-    <?php include('cardodalisay/about.css') ?>
 	<?php include('templates/header.php'); ?>
 
         <main>
-            <div class="container">
+            <div class="container" id="contain-carousel">
+                <div class="row">
+                    <div class="carousel carousel-slider">
+        
+            <div class="caru row col l2">
+                <a class="carousel-item" href=".#one!"><img src="images/carousel_20231001180708.png"></a>
+                <a class="carousel-item" href=".#two!"><img src="images/carousel_20231001180715.png"></a>
+                <a class="carousel-item" href=".#three!"><img src="images/carousel_20231001180719.png"></a>
+                <a class="carousel-item" href=".#four!"><img src="images/carousel_20231001180723.png"></a>
+                <a class="carousel-item" href=".#five!"><img src="images/carousel_20231001180727.png"></a>
+                <a class="carousel-item" href=".#six!"><img src="images/carousel_20231001180732.png"></a>
+                <a class="carousel-item" href=".#seven!"><img src="images/Untitled489_20230923145032.png"></a>
+            </div>     
+      </div>
+                </div>
+
+            </div>
+            <div class="container contain-main">
+
+                
+                <div class="row">
+                    <div class="col s12 m12 l12 center">
+                        <h3 class="section scrollspy" id="process">ARTSTYLES</h3>
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="col s12 m6 l4">
                         <div class="card">
-                            <div class="card-image waves-effect waves-block waves-light">
-                              <img class="activator" src="images/office.jpg">
+                            <div >
                             </div>
                             <div class="card-content">
-                              <span class="card-title activator grey-text text-darken-4">Card Title</span>
-                              <p><a href="card-content.php">Details</a></p>
+                              <span class="card-title activator grey-text text-darken-4">Main Artstyle</span>
+                              <p><a class="tictac" href="card-content.php">Details</a></p>
                             </div>
-                            <div class="card-reveal">
-                              <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-                              <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                            
+                        </div>
+                    </div>
+
+                    <div class="col s12 m6 l4">
+                        <div class="card">
+                            <div >
                             </div>
+                            <div class="card-content">
+                              <span class="card-title activator grey-text text-darken-4">Chibi / Emotes</span>
+                              <p><a class="tictac" href="card-content2.php">Details</a></p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l4 offset-m3">
+                        <div class="card">
+                            <div >
+                            </div>
+                            <div class="card-content">
+                              <span class="card-title activator grey-text text-darken-4">Digital Watercolor</span>
+                              <p><a  class="tictac"href="card-content3.php">Details</a></p>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
+                    <div class="col s12 m6 l4 offset-l2">
+                        <div class="card">
+                            <div>
+                            </div>
+                            <div class="card-content">
+                              <span class="card-title activator grey-text text-darken-4">Graphite Stylization</span>
+                              <p><a class="tictac" href="card-content4.php">Details</a></p>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="col s12 m6 l4">
+                        <div class="card">
+                            <div>
+                            </div>
+                            <div class="card-content">
+                              <span class="card-title activator grey-text text-darken-4">Cute Aesthetic</span>
+                              <p><a class="tictac" href="card-content5.php">Details</a></p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+
+
+
+                <div class="row" id="row-terms">
 
                     <div class="col s12 m12 l12">
-                        <h3 class="section scrollspy" id="process">TERMS & CONDITIONS</h3>
+                        <h3 class="section scrollspy" id="terms">TERMS & CONDITIONS</h3>
                     </div>
                 <div class="col s12 m12 l12">
                     <p class="col s12 m12 l12" align="justify">
@@ -68,18 +139,18 @@
                         </p>
                     </div>
 
-                    <div class="nit center row col s12 m12 l12">
+                    <div class="nit row col s12 m12 l12">
                         <h3 class="dus" >CAN DRAW & CAN'T DRAW</h3>
                     </div>
                     <div class="tin row col s12 m12 l12">
-                        <p class="gwid-1 col s12 m6 l5 offset-l1" align="justify">
+                        <p class="gwid-1 col s12 m6 l5 offset-l1 offset-s4" align="justify">
                         ✓ Real People
                         <br>✓ FanArts
                         <br>✓ Slight Gore
                         <br>✓ Slight NSFW
                         <br>✓ OC 
                         </p>
-                        <p class="gwid-1 col s12 m6 l4" align="justify">
+                        <p class="gwid-1 col s12 m6 l4 offset-s4" align="justify">
                         ✗ Extreme NSFW
                         <br>✗ Pure Gore
                         <br>✗ Mecha

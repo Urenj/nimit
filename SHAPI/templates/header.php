@@ -6,8 +6,6 @@
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 
 	<style type="text/css">
-		@import url('https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz&display=swap');
-
         @import url('https://fonts.googleapis.com/css2?family=Borel&family=Dosis:wght@200;300;400;500;600;700;800&display=swap');
 
         @import url('https://fonts.googleapis.com/css2?family=Titillium+Web&display=swap');
@@ -158,17 +156,27 @@
             margin-bottom: 40px !important;
         }
 
-        main{
+/*        .container{
             padding-left: 300px;
-        }
+        }*/
 
         .card{
             border-radius: 20px 20px !important;
         }
 
+        .carousel.carousel-slider {
+            top: 0px;
+            left: 0;
+        }
+        
+        .section {
+            padding-top: .5rem;
+            padding-bottom: 1rem;
+        }
+        
 /*   EFFECTS     */
 
-        .logo-section, .brand-logo, a{
+        .logo-section, .brand-logo{
             -webkit-animation: bounceIn 0.7s ease-out;
             -moz-animation: bounceIn 0.7s ease-out;
             -o-animation: bounceIn 0.7s ease-out;
@@ -219,13 +227,60 @@
             border-radius: 30px 30px !important;
         }*/
 
+        @media screen and (max-width: 1980px){
+            .contain-main{
+                padding-left: 300px !important;
+            }
+             #contain-carousel{
+                padding-left: 300px !important;
+            }
+
+            #contain-about{
+                padding-left: 300px !important;
+            }
+
+        }
+
+        @media screen and (max-width: 990px){
+            .contain-main{
+                padding-left: 0px !important;
+            }
+             #contain-carousel{
+                padding-left: 0px !important;
+            }
+
+             #row-terms{
+                padding-left: 100px !important;
+            }
+            #contain-about{
+                padding-left: 300px !important;
+            }
+
+        }
+
+        @media screen and (max-width: 750px){
+            .contain-main{
+                padding-left: 0px !important;
+            }
+             #contain-carousel{
+                padding-left: 0px !important;
+            }
+
+             #row-terms{
+                padding-left: 0px !important;
+            }
+            #contain-about{
+                padding-left: 300px !important;
+            }
+        }
+
 
     </style>
 </head>
 <body>
 
 <header>
-    <nav class="top-nav">
+  <!--   <nav class="top-nav">
         <div class="container">
             <div class="nav-wrapper">
                 <div class="row">
@@ -235,15 +290,36 @@
                 </div>
             </div>
         </div>
-    </nav>
-    <ul id="nav-mobile" class="sidenav sidenav-fixed grey" style="transform: translateX(0%);">
+    </nav> -->
+    <ul id="nav-mobile" class="sidenav sidenav-fixed grey hide-on-med-and-down" style="transform: translateX(0%);">
             <div class="logo-section center ">
                 <a href="#" class="no-effect brand-logo amber-text center ">AniNeru</a>
             </div>
-
             <div class="stat center">
-                <div class="status center amber-text"> Status: OPEN</div>
-            </div>
+    <?php
+    include('Admin\assets\config\db.php');
+
+    $email = 'neru@gmail.com';
+    $statusQuery = "SELECT status FROM users WHERE email = ?";
+    $statusStmt = $con->prepare($statusQuery);
+    $statusStmt->bind_param('s', $email);
+    $statusStmt->execute();
+    $statusStmt->bind_result($userStatus);
+
+    // Check if the status is fetched successfully
+    if ($statusStmt->fetch()) {
+        $statusStmt->close();
+    } else {
+        $userStatus = 'Hiatus';
+        $statusStmt->close();
+    }
+    ?>
+
+    <div class="status center <?php echo $userStatus === 'Active' ? 'green-text' : 'amber-text'; ?>">
+        Status: <?php echo $userStatus; ?>
+    </div>
+</div>
+
 
             <div class="login-section">
                 <li>
@@ -254,38 +330,26 @@
             <div class="options-section">
                 <li>
                     <a class="two amber-text" href="index.php"><i class="material-icons amber-text">home</i>Home</a>
-                    <a class="four amber-text" href="">Terms & Conditions<i class="material-icons amber-text">help</i></a>
-                    <a class="three amber-text" href="">About AniNeru<i class="material-icons amber-text">information</i></a>
+                    <a class="four amber-text" href="#terms">Terms & Conditions<i class="material-icons amber-text">help</i></a>
+                    <a class="three amber-text" href="about.php">About AniNeru<i class="material-icons amber-text">information</i></a>
 
                 </li>
             </div>
-
-           <!--  <div class="artstyle-section bold">
-                <li>
-                    <a href="index.php" class="collapsible header waves-effect waves-yellow" tabindex="0">Artstyles</a>
-                    <div class="collapsible-body">
-                        <ul>
-                            li
-                        </ul>
-                    </div>
-                </li>
-                
-            </div> -->
 
 
             <div class="section-footer grey-darken-4">
                 <div class="row">
                     <div class="col s12 m12 l12">
-                        <a href="#" class="btn-floating amber">
+                        <a href="https://www.facebook.com/profile.php?id=100091417051963" class="btn-floating amber">
                         <i class="fa fa-facebook-f black-text" aria-hidden="true"></i>
                         </a>
-                        <a href="#" class="btn-floating amber">
+                        <a href="https://www.instagram.com/_anineru" class="btn-floating amber">
                         <i class="fa fa-instagram black-text" aria-hidden="true"></i>
                         </a>
-                        <a href="#" class="btn-floating amber">
+                        <a href="https://www.youtube.com/channel/UC4ODIPFkHWjTRx5Mkesu46w" class="btn-floating amber">
                         <i class="fa fa-youtube-play black-text" aria-hidden="true"></i>
                         </a>
-                        <a href="#" class="btn-floating amber">
+                        <a href="https://twitter.com/anineru" class="btn-floating amber">
                         <i class="fa fa-twitter black-text" aria-hidden="true"></i>
                         </a>
                     </div>
