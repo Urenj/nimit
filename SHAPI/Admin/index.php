@@ -91,8 +91,6 @@ $con->close();
 .slider:before {
     content: "";
     position: absolute;
-    top: 5px;
-    left: 5px;
     width: 20px;
     height: 20px;
     border-radius: 50%;
@@ -131,7 +129,9 @@ $con->close();
                         <div class="toggle-button">
                             <form method="post" action="">
                                 <input type="hidden" name="newStatus" value="<?php echo $userStatus === 'Active' ? 'Hiatus' : 'Active'; ?>">
-                                <button type="submit" class="slider" onclick="updateStatus()"></button>
+                                <!-- Add the checked attribute based on the user status -->
+                                <input id="checkValue" name="checkbox" type="checkbox" class="iphone-toggle" <?php echo $userStatus === 'Active' ? 'checked' : ''; ?>>
+                                <label for="checkValue" class="slider"></label>
                             </form>
                         </div>
                         <p id="status"><?php echo ucfirst($userStatus); ?></p>
@@ -219,6 +219,17 @@ $con->close();
             </div>
         </article>
     </div>
+
+<script>
+    var checkbox = document.getElementById("checkValue");
+
+    checkbox.addEventListener("change", function() {
+        var form = document.getElementsByTagName("form")[0];
+
+        form.submit();
+    });
+</script>
+
 </body>
 </html>
 
