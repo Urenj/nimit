@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" >
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -82,10 +83,9 @@
 
 		.cardo{
 			position: absolute;
-    		top: 10%;
-    		left: 50%;
+/*    		top: 20%;*/
     		transform: translateX(-50%);
-    		width: 600px;
+    		width: 400px;
 /*    		background-color: #212121 !important;*/
 		}
 
@@ -93,7 +93,7 @@
     		background-color: #2D2F31;
 			border: 1px solid rgba(255,255,255,0.2);
 			border-radius: 7px	;
-			width: 600px;
+/*			width: 600px;*/
     		position: relative;
     		z-index: 1;
 		}
@@ -110,7 +110,7 @@
 
         .details{
         	text-align: justify;
-        	padding: 0px 20px 10px 20px;
+        	padding: 20px 20px 10px 20px;
         }
 
         .line-wh{
@@ -122,25 +122,27 @@
 	    	border-top: 1px solid rgba(255,255,255,0.3);
 	    }
 
-	    .button-price{
+	    /*.button-price{
 	    	 padding-bottom: 15px;
 	    	 padding-left: 130px;
 	    	 padding-right: 130px;
 	    }
-
+*/
 	    .buttons-sample{
+	    	margin-top: 20px !important;
 	    	 padding-bottom: 15px !important;
-            margin-left: 1.5rem;
-            margin-right: 1.5rem;
-           	padding-left: 100px;
-	    	 padding-right: 100px;
+/*            margin-left: 1.5rem;*/
+/*            margin-right: 1.5rem;*/
+/*           	padding-left: 100px;*/
+/*	    	 padding-right: 100px;*/
 	    }
 	    .buttons-bc{
 	    	 padding-bottom: 15px;
-	    	 padding-left: 100px;
+	    	 padding-top: 15px;
+	    	 /*padding-left: 100px;
 	    	 padding-right: 100px;
             margin-left: 1.5rem;
-            margin-right: 1.5rem;
+            margin-right: 1.5rem;*/
 	    }
 
 	    .btn{
@@ -163,6 +165,40 @@
 	    	text-decoration: underline;
 	    	color: #f8bbd0 !important;
 	    }
+
+
+/*		element.style {
+		    height: 440px;
+		}*/
+		.swiper, .swiper-wrapper {
+		    z-index: auto;
+		}
+		.swiper-horizontal {
+		    touch-action: pan-y;
+		}
+
+		.back{
+			font-size: .9rem !important;
+		}
+		.comms-f{
+			font-size: .9rem !important;
+		}
+
+		@media screen and (max-width: 1980px){
+        	.cardo{
+    			left: 53% !important;
+            }        
+
+        }
+
+
+		@media screen and (max-width: 650px){
+            .cardo{
+    			left: 50% !important;
+            }        
+        }
+
+        
 
 
 
@@ -201,27 +237,27 @@
 
 	<div class="cardo">
 		<div class="row">
-		    <div class="col s12 m6">
+		    <div class="col s12 m12 l12">
 		      <div class="card ">
 		        <div class="card-content white-text ">
-		          <span class="card-title amber-text center">Card Title</span>
-		          <p class="details">wala pang description since this will be coming from da ditabis. pero dito nakalagay ang mga details. 
-		          	<br> wala pang description since this will be coming from da ditabis. pero dito nakalagay ang mga details.
-		          	<br> wala pang description since this will be coming from da ditabis. pero dito nakalagay ang mga details.
-		      		<br> wala pang description since this will be coming from da ditabis. pero dito nakalagay ang mga details.</p>
+		          <span class="card-title amber-text center">Main Artstyle</span>
+		          <a class="card-image waves-effect waves-block" href="card-content.php">
+                    <img class="activator" src="./images/Card-1.png" >
+                  </a>
+		          <p class="details">- Anime like Illustration, fully rendered with minimal lighting details (plus plain colored bg of your choice).</p>
 		      			<div class='line-wh'></div>
 		      		<div class="button-price center">
-		      			<a href="mailto:contactanineru@gmail.com" class="btn  amber-text waves-effect waves-yellow center">Price
+		      			<a href="https://www.facebook.com/photo?fbid=176831492040752&set=pcb.176831962040705" class="btn  amber-text waves-effect waves-yellow center">Price
                 		</a>
 		      		</div>
 		      		<div class="buttons-sample center">
-		      			<a href="mailto:contactanineru@gmail.com" class="btn amber-text waves-effect waves-yellow center">Art Samples
+		      			<a href="https://drive.google.com/drive/folders/1yvcKhKQjEU_5U1rokjX1kmV85od0v6vn?usp=sharing" class="btn amber-text waves-effect waves-yellow center">Art Samples
                 		</a>
 		      		</div>
 		      		<div class="buttons-bc center">
-		      			<a href="index.php" class="amber-text  center">◃ Back
+		      			<a href="index.php" class="amber-text back left">◃ Back
                 		</a>
-                		<a href="comms-form.php" class="amber-text center">Commission Now! ▹
+                		<a href="comms-form.php" class="amber-text comms-f right">Commission Now! ▹
                 		</a>
 		      		</div>
 		        </div>

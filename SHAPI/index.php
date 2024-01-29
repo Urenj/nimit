@@ -3,10 +3,11 @@
 	
 	<?php include('templates/header.php'); ?>
 
+
         <main>
-            <div class="container" id="contain-carousel">
+            <!-- <div class="" id="contain-carousel">
                 <div class="row">
-                    <div class="carousel carousel-slider">
+                    <div class="carousel carousel-slider swiper-horizontal">
         
             <div class="caru row col l2">
                 <a class="carousel-item" href=".#one!"><img src="images/carousel_20231001180708.png"></a>
@@ -20,30 +21,44 @@
       </div>
                 </div>
 
-            </div>
-            <div class="container contain-main">
+            </div> -->
 
-                
                 <div class="row">
-                    <div class="col s12 m12 l12 center">
-                        <h3 class="section scrollspy" id="process">ARTSTYLES</h3>
+                    <div class="artstyl col s12 m12 l12 left">
+                        <h3 class="section scrollspy pers" id="process">ARTSTYLES</h3>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col s12 m6 l4">
-                        <div class="card">
-                            <div >
-                            </div>
-                            <div class="card-content">
-                              <span class="card-title activator grey-text text-darken-4">Main Artstyle</span>
-                              <p><a class="tictac" href="card-content.php">Details</a></p>
-                            </div>
-                            
-                        </div>
-                    </div>
+            <div class="container contain-main">
 
-                    <div class="col s12 m6 l4">
+            <div class="row">
+                <div data-v-70c1b04a="" class="swiper swiper-initialized swiper-horizontal fill-width" lazy="">
+
+                    <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);">
+
+                    </div>
+                </div>
+            </div>
+                
+
+                
+
+                <div class="row">
+
+                    <div class="row col s12 m6 l4">
+                <div class="card amber hover-reveal">
+                  <a class="card-image waves-effect waves-block" href="card-content.php">
+                    <img class="activator" src="./images/Card-1.png" >
+                  </a>
+                  <div class="card-content activator">
+                    <span class="card-title activator center">
+                        <h4 class="card-title">Main Artstyle</h4></span>
+                    <p class="center notice">Click picture for info</p>
+                  </div>
+                </div>
+              </div>
+
+                    <!-- <div class="col s12 m6 l4">
                         <div class="card">
                             <div >
                             </div>
@@ -90,7 +105,7 @@
                             </div>
                             
                         </div>
-                    </div>
+                    </div> -->
                     
                 </div>
 
@@ -139,7 +154,7 @@
                         </p>
                     </div>
 
-                    <div class="nit row col s12 m12 l12">
+                    <div class="nit row col s12 m12 l12 offset-s2">
                         <h3 class="dus" >CAN DRAW & CAN'T DRAW</h3>
                     </div>
                     <div class="tin row col s12 m12 l12">
@@ -162,10 +177,6 @@
             </div>
         </main>
         
-        
-
-        
-
 
         
 	<?php include('templates/footer.php'); ?>

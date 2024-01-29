@@ -27,12 +27,17 @@
 
         .sidenav > ul, li, a, i{
             color: #ffc40c !important;
+/*            font-size: .875rem;*/
         }
 
         /*.sidenav.sidenav-fixed{
             background-image: linear-gradient(30deg ,#212121, #ffc107 !important);
 
         }*/
+
+        #nav-mobile{
+            width: 250px;
+        }
 
 
         nav.top-nav{
@@ -96,7 +101,7 @@
 
         .options-section{
             padding-bottom: 15px;
-/*            padding-top: 20px;*/
+            padding-top: 20px;
             align-items: center;
             flex-shrink: 0;
 /*            display: flex;*/
@@ -105,8 +110,8 @@
         }
 
         .stat{
-            margin-left: 6.5rem;
-            margin-right: 6.5rem;
+            margin-left: 4.5rem;
+            margin-right: 4.5rem;
             padding-top: 20px;
 
             border: 1px #212121 !important;
@@ -145,7 +150,7 @@
             flex-direction: column;
             display: flex;
             background-color: #212121 !important;
-            margin-top: 70px !important;
+            margin-top: 90px !important;
             padding-top: 30px !important;
             margin-bottom: 0 !important;
             bottom: 0 !important;
@@ -161,7 +166,33 @@
         }*/
 
         .card{
-            border-radius: 20px 20px !important;
+            border-radius: 0.5rem !important;
+        }
+
+        .card .card-content{
+            padding: 14px !important;
+            border-radius: 0 0 5px 5px !important;
+        }
+
+        .card-title{
+            font-size: 1.8rem !important;
+            margin: .5rem 0 0.912rem 0;
+        }
+
+        .notice{
+            font-size: .75rem !important;
+        }
+
+
+/*        element.style {
+            height: 440px;
+        }*/
+        .carousel, .carousel-slider {
+            z-index: auto;
+            height: 450px !important;
+        }
+        .swiper-horizontal {
+            touch-action: pan-y;
         }
 
         .carousel.carousel-slider {
@@ -173,6 +204,94 @@
             padding-top: .5rem;
             padding-bottom: 1rem;
         }
+
+        .pers{
+            font-size: 40px;
+        }
+
+        .fill-width:not(.px-0) {
+            padding-left: var(--side-margin)!important;
+            padding-right: var(--side-margin)!important;
+        }
+
+        .fill-width {
+            margin-left: calc(var(--side-margin)*-1)!important;
+            margin-right: calc(var(--side-margin)*-1)!important;
+            width: calc(100% + var(--side-margin)*2)!important;
+        }
+
+        .swiper, .swiper-wrapper {
+            z-index: auto;
+        }
+
+        .swiper-wrapper {
+            box-sizing: content-box;
+            display: flex;
+            height: 100%;
+            position: relative;
+            transition-property: transform;
+            transition-timing-function: ease;
+            transition-timing-function: var(--swiper-wrapper-transition-timing-function,initial);
+            width: 100%;
+            z-index: 1;
+        }
+
+        .swiper {
+            display: block;
+            list-style: none;
+            margin-left: auto;
+            margin-right: auto;
+            overflow: hidden;
+            padding: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .swiper-slide {
+            display: block;
+            flex-shrink: 0;
+            height: 100%;
+            position: relative;
+            transition-property: transform;
+            width: 100%;
+        }
+
+        .home-section{
+            adding-bottom: 15px;
+            padding-top: 20px;
+            align-items: center;
+            flex-shrink: 0;
+/*            display: flex;*/
+            margin-left: 1.5rem;
+            margin-right: 1.5rem;
+        }
+
+        /*.artstyl{
+            font-size: 1.5rem !important;
+            line-height: 2rem !important;
+        }*/
+
+        h3{
+            font-size: 2rem !important;
+            line-height: 2rem !important;
+        }
+
+        .copyright{
+            font-size: .75rem !important;
+        }
+
+        .note{
+            font-size: 13px !important;
+        }
+
+        .intro{
+            margin-bottom: 40px !important;
+        }
+        .niro{
+            padding-top: 14px !important;
+        }
+
+
         
 /*   EFFECTS     */
 
@@ -195,6 +314,16 @@
             text-shadow: 0px 1.2px 2px #212121;
             padding: 20px 20px;
 /*            font-size: 30pt;*/
+        }
+
+        .two{
+            font-weight: 1000 !important;
+            padding-left: 10px !important;
+        }
+
+        .sidenav > .two-1{
+/*            font-weight: 1000 !important;*/
+            margin-right: 10px !important;
         }
 
 
@@ -229,19 +358,33 @@
 
         @media screen and (max-width: 1980px){
             .contain-main{
-                padding-left: 300px !important;
+                padding-left: 200px !important;
             }
              #contain-carousel{
                 padding-left: 300px !important;
             }
 
+            .artist{
+                margin-bottom: 0px !important;
+                padding-left: 30px !important;
+            }
+
+            /*#row-terms{
+                padding-left: 400px !important;
+            }*/
+
             #contain-about{
-                padding-left: 300px !important;
+/*                padding-top: 50px !important;*/
+                padding-left: 240px !important;
+            }
+            .artstyl{
+                padding-left: 350px !important;
+
             }
 
         }
 
-        @media screen and (max-width: 990px){
+        @media screen and (max-width: 993px){
             .contain-main{
                 padding-left: 0px !important;
             }
@@ -253,12 +396,15 @@
                 padding-left: 100px !important;
             }
             #contain-about{
-                padding-left: 300px !important;
+                padding-left: 0px !important;
+            }
+            .artstyl{
+                padding-left: 350px !important;
             }
 
         }
 
-        @media screen and (max-width: 750px){
+        @media screen and (max-width: 650px){
             .contain-main{
                 padding-left: 0px !important;
             }
@@ -270,7 +416,11 @@
                 padding-left: 0px !important;
             }
             #contain-about{
-                padding-left: 300px !important;
+                padding-left: 0px !important;
+            }
+            .artstyl{
+                padding-left: 20px !important;
+                font-size: ;
             }
         }
 
@@ -280,6 +430,7 @@
 <body>
 
 <header>
+    
   <!--   <nav class="top-nav">
         <div class="container">
             <div class="nav-wrapper">
@@ -321,17 +472,24 @@
 </div>
 
 
-            <div class="login-section">
+            <!-- <div class="login-section">
                 <li>
                     <a class="one amber-text" href="login.php">Log In<i class="material-icons amber-text">person</i></a>
+                </li>
+            </div> -->
+
+            <div class="home-section">
+                <li>
+                    <a class="two amber-text" href="index.php"><i class=" two-i material-icons amber-text">home</i>Home</a>
+                    
                 </li>
             </div>
 
             <div class="options-section">
+                
                 <li>
-                    <a class="two amber-text" href="index.php"><i class="material-icons amber-text">home</i>Home</a>
-                    <a class="four amber-text" href="#terms">Terms & Conditions<i class="material-icons amber-text">help</i></a>
-                    <a class="three amber-text" href="about.php">About AniNeru<i class="material-icons amber-text">information</i></a>
+                    <a class="four amber-text" href="index.php#row-terms">Terms & Conditions</a>
+                    <a class="three amber-text" href="about.php">About AniNeru</a>
 
                 </li>
             </div>
@@ -356,7 +514,7 @@
                 </div>
                 <div class="footer-copyright grey darken-4 amber-text">
                     <div class="container">
-                        <div class=" center row col s12 m12 l12">© 2024 Copyright AniNeru</div>
+                        <div class="copyright center row col s12 m12 l12">© 2024 Copyright AniNeru</div>
                     </div>
                 </div>
             </div>
