@@ -1,19 +1,5 @@
 
 
-<?php
-include('assets/config/db.php');
-
-if(isset($_FILES["file"]) && $_FILES["file"]["name"] != '') {
-    $test = explode('.', $_FILES["file"]["name"]);
-    $ext = end($test);
-    $name = rand(100, 999) . '.' . $ext;
-    $location = 'upload/' . $name;     
-    move_uploaded_file($_FILES["file"]["tmp_name"], $location);
-    echo '<img src="'.$location.'" style="border-radius:15px;" height="575" width="320" class="img-thumbnail" />';
-}
-
-mysqli_close($con);
-?>
 
 
 <!DOCTYPE html>
@@ -162,7 +148,7 @@ option {
         ?>
         
         <!-- Form -->
-        <form action="" method="post" class="main-wrapper" enctype="multipart/form-data">
+        <form action="upload.php" method="post" class="main-wrapper" enctype="multipart/form-data">
             <div class="work-form">
                 <!-- Image container -->
                     <div class="img-container">
@@ -226,7 +212,7 @@ option {
             </div>
             <!-- Add Card -->
             <span class="submit" style="display: flex; align-items: center;">
-                <input type='hidden' name='client_id'>
+                <input type='hidden' name='id'>
                 <button id = "add-btn" type='submit' class='waves-effect waves-light btn yellow darken-2' name='confirm' style="height: 60px; width: 100px; display: flex; align-items: center;">
                 <i class="material-icons">add</i>&nbsp;&nbsp;Add
                </button>
@@ -264,7 +250,7 @@ $(document).ready(function(){
   {
    form_data.append("file", document.getElementById('file').files[0]);
    $.ajax({
-    url:"",
+    url:"upload.php",
     method:"POST",
     data: form_data,
     contentType: false,
