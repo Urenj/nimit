@@ -1,5 +1,19 @@
 
 
+<?php
+include('assets/config/db.php');
+
+if(isset($_FILES["file"]) && $_FILES["file"]["name"] != '') {
+    $test = explode('.', $_FILES["file"]["name"]);
+    $ext = end($test);
+    $name = rand(100, 999) . '.' . $ext;
+    $location = 'upload/' . $name;     
+    move_uploaded_file($_FILES["file"]["tmp_name"], $location);
+    echo '<img src="'.$location.'" style="border-radius:15px;" height="575" width="320" class="img-thumbnail" />';
+}
+
+mysqli_close($con);
+?>
 
 
 <!DOCTYPE html>
@@ -40,13 +54,13 @@
     border-radius: 15px;
     padding: 20px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 2.6fr;
+    grid-template-columns: 1.2fr 1.2fr 2fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
     grid-template-areas: 
-    "img title"
-    "img dropdown"
-    "img price"
-    "desc desc";
+    "img title desc"
+    "img dropdown desc"
+    "img price desc"
+    "img file desc";
     justify-self: center;
     align-self: center;
     gap: 20px;
@@ -58,7 +72,8 @@
     box-sizing: border-box;
     display: flex;
     flex-flow: row wrap;
-    align-items: end;
+    justify-content: center;
+    align-items: start;
     gap: 20px;
 }
 
@@ -77,6 +92,7 @@
     grid-area: title;
     display: flex;
     position: relative;
+    top: 7px;
     left: 5px;
 }
 
@@ -95,6 +111,13 @@
 .description{
     grid-area: desc;
 }
+
+#filefile{
+    grid-area: file;
+    width: 250px;
+
+}
+
 
 .imij{
     max-height: 300px;
@@ -120,8 +143,8 @@ option {
     justify-self: end;
     align-self: end;
     position:relative;
-    right: 150px;
-    bottom: 15px;
+    right: 130px;
+    bottom: 78px;
 }
 
 #upload{
@@ -147,16 +170,6 @@ option {
                     <span id="uploaded_image" class="imij"></span>
         
 
-                        <div class="file-field input-field">
-                            <div class="btn">
-                                <span>File</span>
-                                <input type="file" id="file"name="file">
-                            </div>
-                            <div class="file-path-wrapper">
-                                <input class="file-path validate" type="text">
-                            </div>
-                        </div>
-                    
                      </div>
                                     <!-- Title -->
                         <div class="title">
@@ -190,6 +203,19 @@ option {
                                 <label for="number_inline" class="yellow-text" style="font-size: 15px;">Price</label>
                             </div>
                         </div>
+                        
+                        <!-- File -->
+                        
+                        <div id="filefile" class="file-field input-field">
+                            <div class="btn">
+                                <span>File</span>
+                                <input type="file" id="file"name="file">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text">
+                            </div>
+                        </div>
+                    
 
                 <!-- Description -->
                 <div class="description" >
@@ -199,10 +225,10 @@ option {
                 </div>
             </div>
             <!-- Add Card -->
-            <span class="submit">
+            <span class="submit" style="display: flex; align-items: center;">
                 <input type='hidden' name='client_id'>
-                <button id = "add-btn" type='submit' class='waves-effect waves-light btn yellow darken-2' name='confirm' style="height: 60px; width: 150px;">
-                <i class="material-icons">add</i>
+                <button id = "add-btn" type='submit' class='waves-effect waves-light btn yellow darken-2' name='confirm' style="height: 60px; width: 100px; display: flex; align-items: center;">
+                <i class="material-icons">add</i>&nbsp;&nbsp;Add
                </button>
             </span>
         </form>
@@ -238,7 +264,7 @@ $(document).ready(function(){
   {
    form_data.append("file", document.getElementById('file').files[0]);
    $.ajax({
-    url:"upload.php",
+    url:"",
     method:"POST",
     data: form_data,
     contentType: false,
