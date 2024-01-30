@@ -60,6 +60,10 @@
     flex-flow: row wrap;
     justify-content: center;
     align-items: start;
+    border-style: inset;
+    border-radius: 15px;
+    border-color: #ffc40c;
+    z-index: 0;
     gap: 20px;
 }
 
@@ -106,8 +110,10 @@
 
 
 .imij{
-    max-height: 300px;
+    max-height: 570px;
     max-width: 320px;
+    position: relative;
+    bottom: 1px;
     z-index: 1;
 }
 
@@ -148,21 +154,22 @@ option {
         ?>
         
         <!-- Form -->
-        <form action="upload.php" method="post" class="main-wrapper" enctype="multipart/form-data">
+        <form action="upload.php" method="post" class="main-wrapper" enctype="multipart/form-data" id="upload_form">
             <div class="work-form">
                 <!-- Image container -->
                     <div class="img-container">
-      
+                 
+                 
                     <span id="uploaded_image" class="imij"></span>
         
 
-                     </div>
+                     </div> 
                                     <!-- Title -->
                         <div class="title">
                             <div class="input-field col s6">
                                 <i class="material-icons prefix">title</i>
                                 <input id="icon_prefix" type="text" class="validate" name="title">
-                                <label for="icon_prefix">Art title</label>
+                                <label for="icon_prefix" class="yellow-text">Art title</label>
                             </div>
                         </div>
                         <!-- Drop Down -->
@@ -228,7 +235,7 @@ option {
 
     </script>
     
-<script>
+<!-- <script>
 $(document).ready(function(){
  $(document).on('change', '#file', function(){
   var name = document.getElementById("file").files[0].name;
@@ -267,6 +274,50 @@ $(document).ready(function(){
   }
  });
 });
+</script> -->
+<script>
+$(document).ready(function(){
+ $(document).on('change', '#file', function(){
+  var name = document.getElementById("file").files[0].name;
+  var form_data = new FormData($('#upload_form')[0]); // Use the form ID here
+
+  var ext = name.split('.').pop().toLowerCase();
+  if(jQuery.inArray(ext, ['gif','png','jpg','jpeg']) == -1) 
+  {
+   alert("Invalid Image File");
+  }
+
+  var oFReader = new FileReader();
+  oFReader.readAsDataURL(document.getElementById("file").files[0]);
+  var f = document.getElementById("file").files[0];
+  var fsize = f.size||f.fileSize;
+
+  if(fsize > 2000000)
+  {
+   alert("Image File Size is very big");
+  }
+  else
+  {
+   form_data.append("file", document.getElementById('file').files[0]);
+   $.ajax({
+    url:"upload.php", // Corrected the URL
+    method:"POST",
+    data: form_data,
+    contentType: false,
+    cache: false,
+    processData: false,
+    beforeSend:function(){
+     $('#uploaded_image').html("<label class='text-success'>Image Uploading...</label>");
+    },   
+    success:function(data)
+    {
+     $('#uploaded_image').html(data);
+    }
+   });
+  }
+ });
+});
 </script>
+
 </body>
 </html>
