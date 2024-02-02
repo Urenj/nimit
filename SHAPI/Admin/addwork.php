@@ -1,7 +1,3 @@
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +14,7 @@
             
 </head>
 <style>
- html{
+ body{
     overflow: hidden;
  }
 
@@ -181,7 +177,7 @@ option {
                                         <option value="" disabled selected>Art work's type of art</option>
                                         <option value="Original ArtStyle">Original ArtStyle</option>
                                         <option value="Chibi">Chibi</option>
-                                        <option value="Digital WaterColor">Digital Water Color</option>
+                                        <option value="Digital WaterColor">Digital WaterColor</option>
                                         <option value="Graphic Stylization">Graphic Stylization</option>
                                         <option value="Cute Aesthetic Style">Cute Aesthetic Style</option>
                                     </select>
@@ -292,7 +288,7 @@ $(document).ready(function(){
   var f = document.getElementById("file").files[0];
   var fsize = f.size||f.fileSize;
 
-  if(fsize > 2000000)
+  if(fsize > 200000000)
   {
    alert("Image File Size is very big");
   }

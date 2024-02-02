@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 30, 2024 at 02:45 PM
+-- Generation Time: Feb 02, 2024 at 09:09 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -41,10 +41,27 @@ CREATE TABLE `card` (
 --
 
 INSERT INTO `card` (`id`, `img`, `title`, `list_style`, `price`, `art_desc`) VALUES
-(66, '587.png', 'Uhaw', 'Digital WaterColor', 2500, 'The painting portrays a contrast between darkness and light, as two lovers hug each other in a dimly lit environment. The water colors create a dramatic and mysterious effect, highlighting the silhouettes of the figures against the black background. The lovers are isolated from the rest of the world, but they find solace and comfort in each other\'s arms. A faint glow emanates from their embrace, suggesting their love is the source of light in their lives. '),
-(67, '244.jpg', 'PEJOIN', 'Original ArtStyle', 100000, 'Sigol'),
-(68, '337.jpg', 'Chomkik', 'Graphic Stylization', 2147483647, 'Good Student'),
-(70, '632.jpg', 'EPLORIR', 'Cute Aesthetic Style', 65656565, 'SHOWEHWESH');
+(73, '407.jpg', 'Done!', 'Chibi', 175, 'Finish Finishhhhhhhh'),
+(74, '557.jpg', 'Witchy Cotie', 'Chibi', 200, 'A cute witch who bright shine against darkness'),
+(76, '411.PNG', '2 Siopaw', 'Chibi', 200, 'Siopawpaw'),
+(77, '411.png', 'Sunshine Fall', 'Original ArtStyle', 350, 'Plawers plawers '),
+(78, '976.png', 'Jonathan Joestar', 'Original ArtStyle', 300, ' OraOraOraOraOraOraOraOra'),
+(79, '956.png', 'Kasumi Miwa', 'Original ArtStyle', 250, 'Jujutsu na Kaisiomai'),
+(80, '420.png', 'Kawai Entry', 'Original ArtStyle', 350, 'Bamboo man'),
+(81, '871.png', 'Uhaw ', 'Digital WaterColor', 300, 'Darkness  surrounds and our light shines bright'),
+(82, '673.png', 'Hello', 'Original ArtStyle', 300, 'Fall'),
+(83, '620.png', 'Geng geng', 'Original ArtStyle', 300, 'Collaboration'),
+(84, '430.png', 'Hzlnut', 'Original ArtStyle', 300, 'Fan Art'),
+(85, '610.png', 'Cotie Bunny', 'Original ArtStyle', 300, 'Cute Bunny  Bunny'),
+(86, '413.png', 'Fall', 'Original ArtStyle', 350, 'Fall season '),
+(87, '264.png', 'Rica', 'Original ArtStyle', 50, 'Commission'),
+(88, '548.png', 'Hi', 'Original ArtStyle', 350, 'Feel the moment'),
+(89, '687.png', 'Higantes Festival', 'Chibi', 300, 'Activity of mine on senior high school'),
+(90, '933.png', 'Luxury', 'Original ArtStyle', 150, 'Commission'),
+(91, '554.png', 'Nutrition Power', 'Original ArtStyle', 350, 'Competition'),
+(92, '229.png', 'The moment', 'Original ArtStyle', 500, 'Moment on paris'),
+(93, '685.png', 'Happy', 'Original ArtStyle', 300, 'The happy moment '),
+(94, '104.png', 'Hapon na', 'Original ArtStyle', 150, 'An afternoon stroll');
 
 -- --------------------------------------------------------
 
@@ -121,7 +138,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`email`, `username`, `password`, `status`) VALUES
 ('banjis@gmail.com', 'Maw', '123456789', 'Hiatus'),
-('neru@gmail.com', 'Neru', '123456789', 'Hiatus'),
+('neru@gmail.com', 'Neru', '123456789', 'Active'),
 ('urenj@gmail.com', 'urenj', 'urenji123', 'Hiatus'),
 ('vhanges@gmail.com', 'Vhanges', '123456789', 'Hiatus');
 
@@ -163,7 +180,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `card`
 --
 ALTER TABLE `card`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
 -- AUTO_INCREMENT for table `commission`
