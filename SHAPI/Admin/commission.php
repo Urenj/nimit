@@ -26,6 +26,9 @@
     <style>
     </style>
 </head>
+<style>
+   
+</style>
 <body>
     <div class="main-wrapper">
         <?php
@@ -36,7 +39,6 @@
             <div class="commission">
                 <table class="centered highlight"> 
                 <thead>
-    
                     <tr>
                         <th class="yellow-text">Client ID</th>
                         <th class="yellow-text">Client Name</th>

@@ -6,8 +6,8 @@ if (isset($_POST['confirm'])) {
 
     $client_id = $_POST['client_id'];
 
-    $insertSql = "INSERT INTO contract (client_name, contact_info, due, style, client_details, client_description)
-        SELECT name, email, due_date, art_style, details, description     
+    $insertSql = "INSERT INTO contract (id, client_name, contact_info, due, style, client_details, client_description)
+        SELECT client_id, name, email, due_date, art_style, details, description     
         FROM commission
         WHERE client_id = $client_id";
 

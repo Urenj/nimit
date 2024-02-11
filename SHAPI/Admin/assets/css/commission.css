@@ -1,4 +1,8 @@
+*, html{
+    scroll-behavior: smooth !important;
+    color: white;
 
+}
 .main-wrapper{
     display: flex;
     flex-direction: row;
@@ -19,7 +23,7 @@
     position: relative;
     top: 53px;
     border-radius: 15px;
-    padding: 15px;
+    padding: 20px;
     overflow-y: scroll;
     display: flex;
     justify-self: center;
@@ -56,7 +60,15 @@ th{
     font-weight: 600;
     font-size: 14px;
     color: #D5C596;
-}
+    position: sticky;
+    top: 0;
+    transform: translateY(-20px);
+    display: flex;
+    background-color: #2D2F31;
+    z-index: 2;
+    height: 70px;
+} 
+
 
 th:nth-child(2),
 td:nth-child(2),
@@ -66,7 +78,6 @@ td:nth-child(7)
     width: 20%;
 }
 
-th:nth-child(7),
 td:nth-child(7){
     display: flex;
     flex-direction: row;
@@ -86,7 +97,7 @@ td:nth-child(7){
   @media (min-height: 950px) {
     .commission{
     position: relative;
-    top: 70x;
+    top: 70px;
     }
   }
 

@@ -12,11 +12,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 <style>
-    *{
+    
+    
+    *, html{
+        scroll-behavior: smooth !important;
         color: white;
-    }
-    html{
-        scroll-behavior: smooth;
+
     }
     body{
         overflow: hidden;
@@ -153,6 +154,18 @@
         line-height: 1.2;
     }
 
+    .btndelete{
+        position: absolute;
+        bottom: 90%;
+        left: 80%;
+        
+    }
+
+    .card-image{
+        height: 400px;
+    }
+
+
 
 
 
@@ -171,30 +184,25 @@
                <?php
                     include('assets/config/db.php');
 
-                    $originalArtQuery = "SELECT `id`, `img`, `title`, `list_style` FROM `card` WHERE `list_style` = 'Original ArtStyle'";
+                    $originalArtQuery = "SELECT `id`, `img`, `list_style` FROM `card` WHERE `list_style` = 'Original ArtStyle'";
                     $originalArtResult = mysqli_query($con, $originalArtQuery);
 
                     if (mysqli_num_rows($originalArtResult) > 0) {
                         while ($originalArtRow = mysqli_fetch_assoc($originalArtResult)) {
                             $originalArtId = $originalArtRow['id'];
                             $originalArtImg = $originalArtRow['img'];
-                            $originalArtTitle = $originalArtRow['title'];
-                            $originalArtListStyle = $originalArtRow['list_style'];
-
                             $location = 'upload/' . $originalArtImg;
 
                             echo '<div class="row">
                                     <div class="row col s12 m6 l5">
                                         <div class="card amber hover-reveal">
-                                            <a class="card-image waves-effect waves-block" href="card-content.php?id=' . $originalArtId . '">
-                                                <img class="activator" src="' . $location . '">
+                                            <a class="card-image waves-effect waves-block" id=' . $originalArtId . '">
+                                                <img id="img-cardo" class="activator" src="' . $location . '">
                                             </a>
-                                            <div class="card-content activator">
-                                                <span class="card-title activator center">
-                                                    <h4 class="card-title">' . $originalArtTitle . '</h4>
-                                                </span>
-                                                <p class="center notice">' . $originalArtListStyle . '</p>
-                                            </div>
+                                                <form class="btndelete" method="post" action="upload.php">
+                                                    <input type="hidden" name="card_id" value="' . $originalArtId . '">
+                                                    <button type="submit" name="delete_card" class="btn waves-effect waves-light red darken-1"><i class="material-icons">clear</i></button>
+                                                </form>
                                         </div>
                                     </div>
                                 </div>';
@@ -213,29 +221,26 @@
                 <?php
                     include('assets/config/db.php');
 
-                    $chibiQuery = "SELECT `id`, `img`, `title`, `list_style` FROM `card` WHERE `list_style` = 'Chibi'";
+                    $chibiQuery = "SELECT `id`, `img`, `list_style` FROM `card` WHERE `list_style` = 'Chibi'";
                     $chibiResult = mysqli_query($con, $chibiQuery);
 
                     if (mysqli_num_rows($chibiResult) > 0) {
                         while ($chibiRow = mysqli_fetch_assoc($chibiResult)) {
                             $chibiId = $chibiRow['id'];
                             $chibiImg = $chibiRow['img'];
-                            $chibiTitle = $chibiRow['title'];
-                            $chibiListStyle = $chibiRow['list_style'];
                             $location = 'upload/'. $chibiImg;
 
                             echo '<div class="row">
                                     <div class="row col s12 m6 l4">
                                         <div class="card amber hover-reveal">
-                                            <a class="card-image waves-effect waves-block" href="card-content.php?id=' . $chibiId . '">
+                                            <a class="card-image waves-effect waves-block" id=' . $chibiId . '">
                                                 <img class="activator" src="' . $location . '">
                                             </a>
-                                            <div class="card-content activator">
-                                                <span class="card-title activator center">
-                                                    <h4 class="card-title">' . $chibiTitle . '</h4>
-                                                </span>
-                                                <p class="center notice">' . $chibiListStyle . '</p>
-                                            </div>
+                                            <form class="btndelete" method="post" action="upload.php">
+                                                <input type="hidden" name="card_id" value="' . $chibiId . '">
+                                                <button type="submit" name="delete_card" class="btn waves-effect waves-light red darken-1"><i class="material-icons">clear</i></button>
+                                            </form>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>';
@@ -254,29 +259,26 @@
                 <?php
                     include('assets/config/db.php');
 
-                    $watercolorQuery = "SELECT `id`, `img`, `title`, `list_style` FROM `card` WHERE `list_style` = 'Digital WaterColor'";
+                    $watercolorQuery = "SELECT `id`, `img`, `list_style` FROM `card` WHERE `list_style` = 'Digital WaterColor'";
                     $watercolorResult = mysqli_query($con, $watercolorQuery);
 
                     if (mysqli_num_rows($watercolorResult) > 0) {
                         while ($watercolorRow = mysqli_fetch_assoc($watercolorResult)) {
                             $watercolorId = $watercolorRow['id'];
                             $watercolorImg = $watercolorRow['img'];
-                            $watercolorTitle = $watercolorRow['title'];
                             $watercolorListStyle = $watercolorRow['list_style'];
                             $location = 'upload/' . $watercolorImg;
 
                             echo '<div class="row">
                                     <div class="row col s12 m6 l4">
                                         <div class="card amber hover-reveal">
-                                            <a class="card-image waves-effect waves-block" href="card-content.php?id=' . $watercolorId . '">
+                                            <a class="card-image waves-effect waves-block" id=' . $watercolorId . '">
                                                 <img class="activator" src="' . $location . '">
                                             </a>
-                                            <div class="card-content activator">
-                                                <span class="card-title activator center">
-                                                    <h4 class="card-title">' . $watercolorTitle . '</h4>
-                                                </span>
-                                                <p class="center notice">' . $watercolorListStyle . '</p>
-                                            </div>
+                                                <form class="btndelete" method="post" action="upload.php">
+                                                    <input type="hidden" name="card_id" value="' . $watercolorId . '">
+                                                    <button type="submit" name="delete_card" class="btn waves-effect waves-light red darken-1"><i class="material-icons">clear</i></button>
+                                                </form>
                                         </div>
                                     </div>
                                 </div>';
@@ -295,29 +297,25 @@
                 <?php
                     include('assets/config/db.php');
 
-                    $graphicStylizationQuery = "SELECT `id`, `img`, `title`, `list_style` FROM `card` WHERE `list_style` = 'Graphic Stylization'";
+                    $graphicStylizationQuery = "SELECT `id`, `img`, `list_style` FROM `card` WHERE `list_style` = 'Graphic Stylization'";
                     $graphicStylizationResult = mysqli_query($con, $graphicStylizationQuery);
 
                     if (mysqli_num_rows($graphicStylizationResult) > 0) {
                         while ($graphicStylizationRow = mysqli_fetch_assoc($graphicStylizationResult)) {
                             $graphicStylizationId = $graphicStylizationRow['id'];
                             $graphicStylizationImg = $graphicStylizationRow['img'];
-                            $graphicStylizationTitle = $graphicStylizationRow['title'];
-                            $graphicStylizationListStyle = $graphicStylizationRow['list_style'];
                             $location = 'upload/' . $graphicStylizationImg;
 
                             echo '<div class="row">
-                                    <div class="row col s12 m6 l4">
+                                    <div class="row col s12 m6 l4">s
                                         <div class="card amber hover-reveal">
                                             <a class="card-image waves-effect waves-block" href="card-content.php?id=' . $graphicStylizationId . '">
                                                 <img class="activator" src="' . $location . '">
                                             </a>
-                                            <div class="card-content activator">
-                                                <span class="card-title activator center">
-                                                    <h4 class="card-title">' . $graphicStylizationTitle . '</h4>
-                                                </span>
-                                                <p class="center notice">' . $graphicStylizationListStyle . '</p>
-                                            </div>
+                                            <form class="btndelete" method="post" action="upload.php">
+                                                <input type="hidden" name="card_id" value="' . $graphicStylizationId . '">
+                                                <button type="submit" name="delete_card" class="btn waves-effect waves-light red darken-1"><i class="material-icons">clear</i></button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>';
@@ -337,29 +335,25 @@
                 <?php
                     include('assets/config/db.php');
 
-                    $cuteAestheticQuery = "SELECT `id`, `img`, `title`, `list_style` FROM `card` WHERE `list_style` = 'Cute Aesthetic Style'";
+                    $cuteAestheticQuery = "SELECT `id`, `img`, `list_style` FROM `card` WHERE `list_style` = 'Cute Aesthetic Style'";
                     $cuteAestheticResult = mysqli_query($con, $cuteAestheticQuery);
 
                     if (mysqli_num_rows($cuteAestheticResult) > 0) {
                         while ($cuteAestheticRow = mysqli_fetch_assoc($cuteAestheticResult)) {
                             $cuteAestheticId = $cuteAestheticRow['id'];
                             $cuteAestheticImg = $cuteAestheticRow['img'];
-                            $cuteAestheticTitle = $cuteAestheticRow['title'];
-                            $cuteAestheticListStyle = $cuteAestheticRow['list_style'];
                             $location = 'upload/' .$cuteAestheticImg;
 
                             echo '<div class="row">
-                                    <div class="row col s12 m6 l4">
+                                    <div class="row col s12 m12 l4">
                                         <div class="card amber hover-reveal">
-                                            <a class="card-image waves-effect waves-block" href="card-content.php?id=' . $cuteAestheticId . '">
+                                            <a class="card-image waves-effect waves-block" id=' . $cuteAestheticId . '">
                                                 <img class="activator" src="' . $location . '">
                                             </a>
-                                            <div class="card-content activator">
-                                                <span class="card-title activator center">
-                                                    <h4 class="card-title">' . $cuteAestheticTitle . '</h4>
-                                                </span>
-                                                <p class="center notice">' . $cuteAestheticListStyle . '</p>
-                                            </div>
+                                            <form class="btndelete" method="post" action="upload.php">
+                                                <input type="hidden" name="card_id" value="' .   $cuteAestheticId . '">
+                                                <button type="submit" name="delete_card" class="btn waves-effect waves-light red darken-1"><i class="material-icons">clear</i></button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>';

@@ -3,14 +3,26 @@ session_start();
 
 if (!isset($_SESSION['email'])) {
 
-    // Redirect to the login page or handle unauthorized access
     header('Location: login.php');
     exit();
 }
 
-// Retrieve the username from the session
+
 $username = $_SESSION['username'];
 
+
+
+if (isset($_GET['action']) && $_GET['action'] == 'logout') {
+
+    $_SESSION = array();
+
+
+    session_destroy();
+
+    
+    header("Location: http://localhost/SHAPI/login.php");
+    exit();
+}
 ?>
 
 
@@ -23,7 +35,10 @@ $username = $_SESSION['username'];
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Titillium+Web&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script defer src="assets\js\materialize.min.js"></script>
 </head>
+
 
     <div class="wrapper">
     <div class="nav-container">
@@ -70,7 +85,7 @@ $username = $_SESSION['username'];
                                 </a>
                             </li>
                             <li>
-                                <a class="nav-buttons" href="TO BE EDIT">
+                                <a class="nav-buttons"href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>?action=logout">
                                 <i class="material-icons">logout</i>
                                 &nbsp;&nbsp;Sign Out
                                 </a>

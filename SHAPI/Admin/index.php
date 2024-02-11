@@ -129,7 +129,6 @@ $con->close();
                         <div class="toggle-button">
                             <form method="post" action="">
                                 <input type="hidden" name="newStatus" value="<?php echo $userStatus === 'Active' ? 'Hiatus' : 'Active'; ?>">
-                                <!-- Add the checked attribute based on the user status -->
                                 <input id="checkValue" name="checkbox" type="checkbox" class="iphone-toggle" <?php echo $userStatus === 'Active' ? 'checked' : ''; ?>>
                                 <label for="checkValue" class="slider"></label>
                             </form>
@@ -180,7 +179,7 @@ $con->close();
                                 </tr>
                             </thead>
 
-                            <tbody>
+                            <tbody >
                             
                             <?php
                            include ('assets/config/db.php');
