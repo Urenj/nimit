@@ -237,6 +237,16 @@
 			animation: bounceIn 0.7s ease-out;
 		}
 
+		.card-image{
+			height: 300px;
+			width: 300px;
+		}
+
+		.orig-img{
+			display: flex;
+			flex-wrap: wrap;
+			
+		}
 
 	</style>
 
@@ -251,8 +261,27 @@
 		      <div class="card ">
 		        <div class="card-content white-text ">
 		          <span class="card-title amber-text center">Main Artstyle</span>
-                    <img class="card-image  materialboxed" src="./images/Card-1.png" >
+					<div class="orig-img">
+					<?php
+						include('Admin\assets\config\db.php');
 
+						$originalArtQuery = "SELECT `img`, `list_style` FROM `card` WHERE `list_style` = 'Original ArtStyle'";
+						$originalArtResult = mysqli_query($con, $originalArtQuery);
+
+						if (mysqli_num_rows($originalArtResult) > 0) {
+							while ($originalArtRow = mysqli_fetch_assoc($originalArtResult)) {
+								$originalArtImg = $originalArtRow['img'];
+								$location = 'Admin/upload/' . $originalArtImg;
+
+								echo '<img class="card-image  materialboxed" src="' . $location . '" >';
+							}
+						} else {
+							echo "No Original Art Style records";
+						}
+
+						mysqli_close($con);
+                    ?>
+					</div>
 		      		<div class="buttons-bc center">
 		      			<a href="index.php" class="amber-text back left">◃ Back
                 		</a>
