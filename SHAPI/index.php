@@ -5,23 +5,7 @@
 
 
         <main>
-            <!-- <div class="" id="contain-carousel">
-                <div class="row">
-                    <div class="carousel carousel-slider swiper-horizontal">
-        
-            <div class="caru row col l2">
-                <a class="carousel-item" href=".#one!"><img src="images/carousel_20231001180708.png"></a>
-                <a class="carousel-item" href=".#two!"><img src="images/carousel_20231001180715.png"></a>
-                <a class="carousel-item" href=".#three!"><img src="images/carousel_20231001180719.png"></a>
-                <a class="carousel-item" href=".#four!"><img src="images/carousel_20231001180723.png"></a>
-                <a class="carousel-item" href=".#five!"><img src="images/carousel_20231001180727.png"></a>
-                <a class="carousel-item" href=".#six!"><img src="images/carousel_20231001180732.png"></a>
-                <a class="carousel-item" href=".#seven!"><img src="images/Untitled489_20230923145032.png"></a>
-            </div>     
-      </div>
-                </div>
-
-            </div> -->
+            
 
                 <div class="row">
                     <div class="artstyl col s12 m12 l12 left">
@@ -43,9 +27,8 @@
 
                 
 
-                <div class="row">
-
-                    <div class="row col s12 m6 l4">
+        <div class="row">
+            <div class="row col s12 m6 l4">
                 <div class="card amber hover-reveal">
                   <a class="card-image waves-effect waves-block" href="card-content.php">
                     <img class="activator" src="./images/Card-1.png" >
@@ -58,56 +41,58 @@
                 </div>
               </div>
 
-                    <!-- <div class="col s12 m6 l4">
-                        <div class="card">
-                            <div >
-                            </div>
-                            <div class="card-content">
-                              <span class="card-title activator grey-text text-darken-4">Chibi / Emotes</span>
-                              <p><a class="tictac" href="card-content2.php">Details</a></p>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <div class="col s12 m6 l4 offset-m3">
-                        <div class="card">
-                            <div >
-                            </div>
-                            <div class="card-content">
-                              <span class="card-title activator grey-text text-darken-4">Digital Watercolor</span>
-                              <p><a  class="tictac"href="card-content3.php">Details</a></p>
-                            </div>
-                            
-                        </div>
-                    </div>
+              <div class="row col s12 m6 l4">
+                <div class="card amber hover-reveal">
+                  <a class="card-image waves-effect waves-block" href="card-content.php">
+                    <img class="activator" src="./images/Card-2.png" >
+                  </a>
+                  <div class="card-content activator">
+                    <span class="card-title activator center">
+                        <h4 class="card-title">Chibi/ Emotes</h4></span>
+                    <p class="center notice">Click picture for info</p>
+                  </div>
                 </div>
+              </div>
 
-                <div class="row">
-                    <div class="col s12 m6 l4 offset-l2">
-                        <div class="card">
-                            <div>
-                            </div>
-                            <div class="card-content">
-                              <span class="card-title activator grey-text text-darken-4">Graphite Stylization</span>
-                              <p><a class="tictac" href="card-content4.php">Details</a></p>
-                            </div>
-                            
-                        </div>
-                    </div>
-
-                    <div class="col s12 m6 l4">
-                        <div class="card">
-                            <div>
-                            </div>
-                            <div class="card-content">
-                              <span class="card-title activator grey-text text-darken-4">Cute Aesthetic</span>
-                              <p><a class="tictac" href="card-content5.php">Details</a></p>
-                            </div>
-                            
-                        </div>
-                    </div> -->
-                    
+              <div class="row col s12 m6 l4">
+                <div class="card amber hover-reveal">
+                  <a class="card-image waves-effect waves-block" href="card-content.php">
+                    <img class="activator" src="./images/Card-4.png" >
+                  </a>
+                  <div class="card-content activator">
+                    <span class="card-title activator center">
+                        <h4 class="card-title">Sketch/ Graphite</h4></span>
+                    <p class="center notice">Click picture for info</p>
+                  </div>
                 </div>
+              </div>
+
+              <div class="row col s12 m6 l4 offset-l2">
+                <div class="card amber hover-reveal">
+                  <a class="card-image waves-effect waves-block" href="card-content.php">
+                    <img class="activator" src="./images/Card-3.png" >
+                  </a>
+                  <div class="card-content activator">
+                    <span class="card-title activator center">
+                        <h4 class="card-title">Digital Watercolor</h4></span>
+                    <p class="center notice">Click picture for info</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row col s12 m6 l4 offset-m3">
+                <div class="card amber hover-reveal">
+                  <a class="card-image waves-effect waves-block" href="card-content.php">
+                    <img class="activator" src="./images/Card-5.png" >
+                  </a>
+                  <div class="card-content activator">
+                    <span class="card-title activator center">
+                        <h4 class="card-title">Simple Colored Style</h4></span>
+                    <p class="center notice">Click picture for info</p>
+                  </div>
+                </div>
+              </div>
+        </div>
 
 
 
@@ -117,7 +102,7 @@
                         <h3 class="section scrollspy" id="terms">TERMS & CONDITIONS</h3>
                     </div>
                 <div class="col s12 m12 l12">
-                    <p class="col s12 m12 l12" align="justify">
+                    <p class="col s12 m12 l12 pi" align="justify">
                     • Communication is through facebook messenger or Instagram DMs
                     <br>• Payment through GCash
                     <br>• Must pay atleast half or full payment before I draw the Sketch
@@ -140,7 +125,7 @@
                         <p>WHAT TO DO?</p>
                     </div>
                     <div class="col s12 m12 l12  ">
-                        <p class="col s12 m12 l12" align="justify">
+                        <p class="col s12 m12 l12 pi" align="justify">
                         • Contact my social media accounts if you're interested on commissioning me ^^
                         <br>• Please READ carefully my TERMS & CONDITIONS before proceeding
                         <br>• Provide a CLEAR and HD reference photo
@@ -158,14 +143,14 @@
                         <h3 class="dus" >CAN DRAW & CAN'T DRAW</h3>
                     </div>
                     <div class="tin row col s12 m12 l12">
-                        <p class="gwid-1 col s12 m6 l5 offset-l1 offset-s4" align="justify">
+                        <p class="gwid-1 col s12 m6 l5 offset-l1 offset-s4 pi" align="justify">
                         ✓ Real People
                         <br>✓ FanArts
                         <br>✓ Slight Gore
                         <br>✓ Slight NSFW
                         <br>✓ OC 
                         </p>
-                        <p class="gwid-1 col s12 m6 l4 offset-s4" align="justify">
+                        <p class="gwid-1 col s12 m6 l4 offset-s4 pi" align="justify">
                         ✗ Extreme NSFW
                         <br>✗ Pure Gore
                         <br>✗ Mecha

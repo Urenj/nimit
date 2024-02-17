@@ -39,10 +39,10 @@
     grid-template-columns: 1.2fr 1.2fr 2fr;
     grid-template-rows: 1fr 1fr 1fr 1fr;
     grid-template-areas: 
-    "img title desc"
-    "img dropdown desc"
-    "img price desc"
-    "img file desc";
+    "img img dropdown"
+    "img img dropdown"
+    "img img file"
+    "img img file";
     justify-self: center;
     align-self: center;
     gap: 20px;
@@ -87,12 +87,12 @@
     width: 250px;
 }
 
-.price-container{
+/* .price-container{
     grid-area: price;
     position: relative;
     top: 5px;
     
-}
+} */
 
 .description{
     grid-area: desc;
@@ -107,15 +107,17 @@
 
 .imij{
     max-height: 570px;
-    max-width: 320px;
+    max-width: 655px;
     position: relative;
     bottom: 1px;
+    right: .5px;
     z-index: 1;
 }
 
 textarea{
-    height: 300px;
+    max-height: 190px;
     font-size: 20px;
+    overflow-y: scroll;
 }   
 
 select {
@@ -140,6 +142,14 @@ option {
     bottom: 20px;
 }
 
+#add-btn{
+    opacity: 0.5;
+}
+
+#add-btn:hover{
+    opacity: 1.0;
+}
+
 
 </style>
 <body>
@@ -161,13 +171,13 @@ option {
 
                      </div> 
                                     <!-- Title -->
-                        <div class="title">
+                        <!-- <div class="title">
                             <div class="input-field col s6">
                                 <i class="material-icons prefix">title</i>
                                 <input id="icon_prefix" type="text" class="validate" name="title">
                                 <label for="icon_prefix" class="yellow-text">Art title</label>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- Drop Down -->
                         <div class="drop-down">
                             <div class="input-field col s12">
@@ -185,13 +195,13 @@ option {
                             </div>
                         </div>
                         <!-- Price -->
-                        <div class="price-container">
+                        <!-- <div class="price-container">
                             <div class="input-field inline">
                                 <i class="material-icons prefix ">attach_money</i>
                                 <input id="number_inline" type="number" class="validate" name="price">
                                 <label for="number_inline" class="yellow-text" style="font-size: 15px;">Price</label>
                             </div>
-                        </div>
+                        </div> -->
                         
                         <!-- File -->
                         
@@ -207,11 +217,10 @@ option {
                     
 
                 <!-- Description -->
-                <div class="description" >
-                    <!-- Add input fields for description -->
+                <!-- <div class="description" >
                     <label for="description" class="yellow-text" style="font-size: 15px;" >Description:</label>
                     <textarea id="description" class="materialize-textarea" name="description" data-length="120" ></textarea>
-                </div>
+                </div> -->
             </div>
             <!-- Add Card -->
             <span class="submit" style="display: flex; align-items: center;">
@@ -275,8 +284,7 @@ $(document).ready(function(){
 $(document).ready(function(){
  $(document).on('change', '#file', function(){
   var name = document.getElementById("file").files[0].name;
-  var form_data = new FormData($('#upload_form')[0]); // Use the form ID here
-
+  var form_data = new FormData($('#upload_form')[0]); 
   var ext = name.split('.').pop().toLowerCase();
   if(jQuery.inArray(ext, ['gif','png','jpg','jpeg']) == -1) 
   {
@@ -288,7 +296,7 @@ $(document).ready(function(){
   var f = document.getElementById("file").files[0];
   var fsize = f.size||f.fileSize;
 
-  if(fsize > 200000000)
+  if(fsize > 2000000000)
   {
    alert("Image File Size is very big");
   }
@@ -296,7 +304,7 @@ $(document).ready(function(){
   {
    form_data.append("file", document.getElementById('file').files[0]);
    $.ajax({
-    url:"upload.php", // Corrected the URL
+    url:"upload.php",
     method:"POST",
     data: form_data,
     contentType: false,

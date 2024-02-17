@@ -207,6 +207,7 @@
 
         .pers{
             font-size: 40px;
+            text-align: center;
         }
 
         .fill-width:not(.px-0) {
@@ -360,6 +361,9 @@
             .contain-main{
                 padding-left: 200px !important;
             }
+            /*.contain-main > .pi{
+                font-size: 20pt !important;
+            }*/
              #contain-carousel{
                 padding-left: 300px !important;
             }
@@ -377,14 +381,22 @@
 /*                padding-top: 50px !important;*/
                 padding-left: 240px !important;
             }
+
+            /*#process{
+                padding-left: 200px;
+            }*/
+
             .artstyl{
-                padding-left: 350px !important;
+                padding-left: 200px !important;
 
             }
 
         }
 
         @media screen and (max-width: 993px){
+            /*#process{
+                padding-left: 200px;
+            }*/
             .contain-main{
                 padding-left: 0px !important;
             }
@@ -399,8 +411,12 @@
                 padding-left: 0px !important;
             }
             .artstyl{
-                padding-left: 350px !important;
+                padding-left: 0px !important;
+
             }
+            /*.artstyl{
+                padding-left: 350px !important;
+            }*/
 
         }
 

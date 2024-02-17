@@ -251,7 +251,7 @@
                 		</a>
 		      		</div>
 		      		<div class="buttons-sample center">
-		      			<a href="https://drive.google.com/drive/folders/1yvcKhKQjEU_5U1rokjX1kmV85od0v6vn?usp=sharing" class="btn amber-text waves-effect waves-yellow center">Art Samples
+		      			<a href="sample.php" class="btn amber-text waves-effect waves-yellow center">Art Samples
                 		</a>
 		      		</div>
 		      		<div class="buttons-bc center">

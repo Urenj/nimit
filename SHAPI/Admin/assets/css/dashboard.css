@@ -1,3 +1,8 @@
+*, html{
+        scroll-behavior: smooth !important;
+        color: white;
+
+}
 
 .main-wrapper{
     display: flex;
@@ -6,7 +11,7 @@
 }
 
 .wrapper-dashboard{
-    height: 100vh;
+    height: auto;
     width: 1300px ;
     display: flex;
     justify-content: center;
@@ -24,17 +29,22 @@
 .status-wrapper{
     grid-area: 1/1;
     padding: 5px 15px 15px 15px;
+    position: relative;
+    top: -4px;
 }
 
 .current-client-wrapper{
     grid-area: 1/2;
     padding: 5px 15px 15px 15px;
+    position: relative;
+    top: -4px;
 }   
 
 .contract-wrapper{
     grid-area: 2/1/-2/-1;
-    padding: 5px 15px 15px 15px;
-
+    padding: 15px 15px 15px 15px;
+    position: relative;
+    top: -14px;
 }
 
 .status-box{
@@ -183,8 +193,15 @@ td {
 }
 
 th{
+    height: 80px;
     font-size: 14px;
     font-weight: 600;
+    position: sticky;
+    top: 0;
+    transform: translateY(-20px);
+    display: flex;
+    background-color: #2D2F31;
+    z-index: 3;
 }
 
 th:nth-child(6),
@@ -205,5 +222,13 @@ td:nth-child(7) {
     .current-client-box{
         position: relative;
         top: 45px;
+    }
+}
+
+@media (min-height: 715px)
+{
+    .contract-wrapper{
+        position: relative;
+        top: 0px;
     }
 }
