@@ -238,10 +238,8 @@
 		}
 
 		.card-image{
-/*			height: 300px;*/
+			height: 300px;
 			width: 300px;
-			border-radius: 15px !important;
-			padding-right: 10px;
 		}
 
 		.orig-img{
